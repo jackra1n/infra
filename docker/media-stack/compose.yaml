@@ -1,0 +1,92 @@
+version: "3.7"
+services:
+  sonarr:
+    image: ghcr.io/hotio/sonarr:nightly
+    container_name: sonarr
+    environment:
+      - PUID=13001
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config/sonarr-config:/config
+      - ./data:/data
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=13002
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config/radarr-config:/config
+      - ./data:/data
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=13003
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config/bazarr-config:/config
+      - ./data:/data
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:develop
+    container_name: prowlarr
+    environment:
+      - PUID=13006
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config/prowlarr-config:/config
+    ports:
+      - "9696:9696"
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=13010
+      - PGID=13000
+      - VERSION=docker
+      - PLEX_CLAIM=claim-YVDstLrkwd5Dy5xXzQpD
+    volumes:
+      - ./config/plex-config:/config
+      - ./data/media:/media
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=13007
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Zurich
+      - WEBUI_PORT=8070
+    volumes:
+      - ./config/qbittorrent-config:/config
+      - ./data/torrents:/data/torrents
+    ports:
+      - "8070:8070"
+      - "6881:6881"
+      - "6881:6881/udp"
+    restart: unless-stopped
