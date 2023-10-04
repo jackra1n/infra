@@ -21,7 +21,7 @@ sudo usermod -a -G mediacenter overseerr
 
 # Create directories
 sudo mkdir -pv config/{sonarr,radarr,prowlarr,bazarr,qbittorrent,plex,overseerr}-config
-sudo mkdir -pv data/{sonarr,radarr,prowlarr,bazarr,qbittorrent,plex}-data
+sudo mkdir -pv data/{torrents,media}/{tv,movies}
 
 # Set permissions
 sudo chmod -R 775 data/
