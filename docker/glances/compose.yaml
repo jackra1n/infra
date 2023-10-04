@@ -13,7 +13,7 @@ services:
       - "./glances.conf:/glances/conf/glances.conf"
     environment:
       - GLANCES_OPT: "-C /glances/conf/glances.conf -w"
-      - TZ: "${TZ}"
+      - TZ: "Europe/Zurich"
     deploy:
       resources:
         reservations:
