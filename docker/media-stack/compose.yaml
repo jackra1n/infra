@@ -91,6 +91,20 @@ services:
       - ./data/media:/media
     restart: unless-stopped
 
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=13007
+      - PGID=13000
+      - UMASK=002
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./config/overseer-config:/app/config
+    ports:
+      - "5055:5055"
+    restart: unless-stopped
+
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
