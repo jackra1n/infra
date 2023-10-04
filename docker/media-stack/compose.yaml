@@ -85,7 +85,7 @@ services:
       - PUID=13006
       - PGID=13000
       - VERSION=docker
-      - PLEX_CLAIM=claim-YVDstLrkwd5Dy5xXzQpD
+      - PLEX_CLAIM=
     volumes:
       - ./config/plex-config:/config
       - ./data/media:/media
@@ -98,9 +98,9 @@ services:
       - PUID=13007
       - PGID=13000
       - UMASK=002
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Zurich
     volumes:
-      - ./config/overseer-config:/app/config
+      - ./config/overseerr-config:/app/config
     ports:
       - "5055:5055"
     restart: unless-stopped
@@ -112,7 +112,7 @@ services:
       - LOG_LEVEL=info
       - LOG_HTML=false
       - CAPTCHA_SOLVER=none
-      - TZ=Europe/Amsterdam
+      - TZ=Europe/Zurich
     ports:
       - "8191:8191"
     restart: unless-stopped
