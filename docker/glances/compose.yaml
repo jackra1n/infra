@@ -1,19 +1,19 @@
-version: '3'
+version: "3"
 
-services: 
-  monitoring:
-    image: nicolargo/glances:dev
+services:
+  glances:
+    container_name: glances
+    image: joweisberg/glances:latest
     restart: unless-stopped
     pid: host
-    privileged: true
-    network_mode: "host"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock:ro"
-      - "./glances.conf:/glances/conf/glances.conf"
+    ports:
+      - 61208:61208
     environment:
-      - GLANCES_OPT: "-C /glances/conf/glances.conf -w"
-      - TZ: "Europe/Zurich"
+      - TZ=Europe/Zurich
+      - GLANCES_OPT=--webserver
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/docker/glances:/glances/conf
     deploy:
       resources:
         reservations:
