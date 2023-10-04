@@ -3,17 +3,16 @@ version: "3"
 services:
   glances:
     container_name: glances
-    image: joweisberg/glances:latest
+    image: nicolargo/glances:latest-full
     restart: unless-stopped
     pid: host
     ports:
       - 61208:61208
     environment:
       - TZ=Europe/Zurich
-      - GLANCES_OPT=--webserver
+      - GLANCES_OPT=-w
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /var/docker/glances:/glances/conf
     deploy:
       resources:
         reservations:
