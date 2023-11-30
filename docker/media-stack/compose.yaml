@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 services:
   sonarr:
     image: ghcr.io/hotio/sonarr:nightly
@@ -56,7 +56,7 @@ services:
       - ./config/bazarr-config:/config
       - ./data:/data
     ports:
-      - 6767:6767
+      - "6767:6767"
     restart: unless-stopped
 
   qbittorrent:
