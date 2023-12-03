@@ -15,6 +15,7 @@ services:
       DIUN_WATCH_JITTER: "30s"
       DIUN_PROVIDERS_DOCKER: true
       DIUN_NOTIF_DISCORD_WEBHOOKURL: "..."
+      DIUN_NOTIF_DISCORD_MENTIONS: "@everyone"
     restart: always
 
 
