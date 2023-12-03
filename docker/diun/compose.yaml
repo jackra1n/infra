@@ -9,15 +9,12 @@ services:
       - "./data:/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - "TZ=Europe/Paris"
-      - "DIUN_WATCH_WORKERS=20"
-      - "DIUN_WATCH_SCHEDULE=0 */6 * * *"
-      - "DIUN_WATCH_JITTER=30s"
-      - "DIUN_PROVIDERS_DOCKER=true"
-
-      - "DIUN_NOTIF_DISCORD_WEBHOOKURL=..."
-    labels:
-      - "diun.enable=true"
+      TZ: "Europe/Paris"
+      DIUN_WATCH_WORKERS: 20
+      DIUN_WATCH_SCHEDULE: "0 */6 * * *"
+      DIUN_WATCH_JITTER: "30s"
+      DIUN_PROVIDERS_DOCKER: true
+      DIUN_NOTIF_DISCORD_WEBHOOKURL: "..."
     restart: always
 
 
