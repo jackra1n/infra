@@ -6,14 +6,14 @@ services:
     container_name: watchtower
     environment:
     # with discord notifications
-      - WATCHTOWER_MONITOR_ONLY=true
-      - WATCHTOWER_NO_PULL=true
-      - WATHCTOWER_SCHEDULE=0 0 4 * * *
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATION_URL= # your discord webhook: discord://webhook_token@webhook_id
-      - TZ=Europe/Zurich
-      - WATCHTOWER_HTTP_API_TOKEN= #your token
-      - WATCHTOWER_HTTP_API_METRICS=true
+      WATCHTOWER_MONITOR_ONLY: true
+      WATCHTOWER_NO_PULL: true
+      WATCHTOWER_SCHEDULE: "0 0 4 * * *"
+      WATCHTOWER_NOTIFICATIONS: "shoutrrr"
+      WATCHTOWER_NOTIFICATION_URL: "" # your discord webhook: discord://webhook_token@webhook_id
+      TZ: "Europe/Zurich"
+      WATCHTOWER_HTTP_API_TOKEN: "" #your token
+      WATCHTOWER_HTTP_API_METRICS: true
     networks:
       - proxy
     ports:
