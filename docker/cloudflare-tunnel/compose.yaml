@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  tunnel:
+    container_name: cloudflared-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    network_mode: host
+    command: tunnel run
+    environment:
+      TUNNEL_TOKEN: #"mytokengoeshere"
