@@ -3,7 +3,7 @@ version: "3.8"
 services:
   adguardhome:
     container_name: adguardhome
-    image: adguard/adguardhome
+    image: adguard/adguardhome:latest
     restart: unless-stopped
     volumes:
       - './adguard_data:/opt/adguardhome/work'

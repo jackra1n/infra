@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
+    image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
       - PUID=13003
@@ -58,6 +58,29 @@ services:
       - ./data:/data
     ports:
       - "6767:6767"
+    restart: unless-stopped
+
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 6881:6881
+      - 6881:6881/udp
+      - 8111:8000/tcp
+      - 8070:8070
+    volumes:
+      - ./config/gluetun-config:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER= #
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY= #
+      - WIREGUARD_ADDRESSES= #
+      - SERVER_CITIES= #
+      - TZ=Europe/Zurich
     restart: unless-stopped
 
   qbittorrent:
@@ -87,10 +110,17 @@ services:
       - PGID=13000
       - VERSION=docker
       - PLEX_CLAIM=
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
     volumes:
       - ./config/plex-config:/config
       - ./data/media:/media
     restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
 
   overseerr:
     image: sctx/overseerr:latest

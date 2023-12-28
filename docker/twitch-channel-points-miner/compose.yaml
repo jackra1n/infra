@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   miner:
-    image: rdavidoff/twitch-channel-points-miner-v2
+    image: rdavidoff/twitch-channel-points-miner-v2:latest
     container_name: twitch-points-miner
     stdin_open: true
     tty: true
