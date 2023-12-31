@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   sonarr:
-    image: ghcr.io/hotio/sonarr:nightly
+    image: ghcr.io/hotio/sonarr:v4
     container_name: sonarr
     environment:
       - PUID=13001
