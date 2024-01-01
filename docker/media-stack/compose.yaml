@@ -122,6 +122,17 @@ services:
           devices:
             - capabilities: [gpu]
 
+  tautulli:
+    image: ghcr.io/tautulli/tautulli:latest
+    container_name: tautulli
+    environment:
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config/tautulli-config:/config
+    ports:
+      - "8181:8181"
+    restart: unless-stopped
+
   overseerr:
     image: sctx/overseerr:latest
     container_name: overseerr

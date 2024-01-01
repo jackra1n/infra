@@ -20,7 +20,7 @@ sudo usermod -a -G mediacenter plex
 sudo usermod -a -G mediacenter overseerr
 
 # Create directories
-sudo mkdir -pv config/{sonarr,radarr,prowlarr,bazarr,qbittorrent,plex,overseerr}-config
+sudo mkdir -pv config/{sonarr,radarr,prowlarr,bazarr,qbittorrent,plex,tautulli,overseerr}-config
 sudo mkdir -pv data/{torrents,media}/{tv,movies}
 
 # Set permissions
