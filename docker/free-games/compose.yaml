@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  free-games-claimer:
+    container_name: epic-free-games
+    image: ghcr.io/claabs/epicgames-freegames-node:latest
+    ports:
+      - 3887:3000
+    volumes:
+      - ./config/:/usr/app/config
+    environment:
+      - TZ=Europe/Zurich
+    restart: unless-stopped
