@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  pialert:
+    container_name: pialert
+    image: "jokobsk/pi.alert:latest"
+    network_mode: "host"
+    volumes:
+      - ./data/pialert_db:/home/pi/pialert/db
+      - ./data/pialert_config:/home/pi/pialert/config
+    environment:
+      - TZ=Europe/Zurich
+    restart: unless-stopped
