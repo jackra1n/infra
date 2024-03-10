@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data:/srv
+      - ./config/filebrowser.db:/database.db
+      - ./config/.filebrowser.json:/.filebrowser.json
+    user: "${UID}:${GID}"

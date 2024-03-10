@@ -1,21 +1,19 @@
 {
     "runOnStartup": true,
-    "cronSchedule": "5 16 * * *",
+    "cronSchedule": "0 0,6,12,18 * * *",
     "logLevel": "info",
     "webPortalConfig": {
       "baseUrl": "https://store.epicgames.com"
     },
     "accounts": [
       {
-        "email": "removed",
-        "password": "removed",
-        "totp": "removed"
+        "email": "removed"
       }
     ],
     "notifiers": [
       {
         "type": "discord",
-        "webhookUrl": "https://discordapp.com/api/webhooks/removed"
+        "webhookUrl": "https://discordapp.com/api/webhooks/removed" 
       }
     ]
   }

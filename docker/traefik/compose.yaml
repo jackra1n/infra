@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   reverse-proxy:
-    image: traefik:v2.10
+    image: traefik:latest
     container_name: traefik
     restart: unless-stopped
     networks:
@@ -21,6 +21,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/etc/traefik
       - ./letsencrypt:/letsencrypt
+      - ./logs:/var/log/traefik/
     # Those labels will allow you access subdomains of your domain with SSL
     labels:
       - "traefik.http.routers.traefik-cert.tls.certresolver=production"
