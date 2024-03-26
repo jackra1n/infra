@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   miner:
     image: rdavidoff/twitch-channel-points-miner-v2:latest

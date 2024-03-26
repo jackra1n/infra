@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   free-games-claimer:
     container_name: epic-free-games

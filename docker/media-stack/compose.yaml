@@ -75,15 +75,15 @@ services:
     volumes:
       - ./config/gluetun-config:/gluetun
     environment:
-      - VPN_SERVICE_PROVIDER= #
+      - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY= #
       - WIREGUARD_ADDRESSES= #
       - SERVER_CITIES= #
       - TZ=Europe/Zurich
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_PROVIDER=protonvpn
     restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -100,8 +100,6 @@ services:
       - ${DATA_FOLDER}/torrents:/data/torrents
       #- ./nightwalker:/opt/nightwalker # Nightwalker theme
     restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
 
   plex:
     image: lscr.io/linuxserver/plex:latest

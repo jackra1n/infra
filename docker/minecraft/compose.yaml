@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   mc:
     image: itzg/minecraft-server
@@ -7,7 +5,7 @@ services:
     ports:
       - "25565:25565"
     environment:
-      EULA: "TRUE"
+      EULA: "FALSE" # set to TRUE to accept the EULA
       TYPE: PAPER
       VIEW_DISTANCE: 18
       MEMORY: 6G
