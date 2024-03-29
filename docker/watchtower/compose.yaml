@@ -8,6 +8,7 @@ services:
       WATCHTOWER_NO_PULL: true
       WATCHTOWER_SCHEDULE: "0 0 4 * * *"
       WATCHTOWER_NOTIFICATIONS: "shoutrrr"
+      WATCHTOWER_NOTIFICATIONS_HOSTNAME: "myserver" # change to whatever you wanna call your server in notifications
       WATCHTOWER_NOTIFICATION_URL: "" # your discord webhook: discord://webhook_token@webhook_id
       TZ: "Europe/Zurich"
       WATCHTOWER_HTTP_API_TOKEN: "" #your token
