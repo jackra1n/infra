@@ -3,8 +3,6 @@ services:
     image: traefik:latest
     container_name: traefik
     restart: unless-stopped
-    networks:
-      - proxy
     ports:
       - "80:80"
       - "443:443"
@@ -28,7 +26,3 @@ services:
       - "traefik.http.routers.traefik-cert.rule=Host(`traefik.local.example.com`)"
       - "traefik.http.routers.traefik-cert.service=api@internal"
       - "traefik.http.routers.traefik-cert.middlewares=default-whitelist@file"
-
-networks:
-  proxy:
-    external: true

@@ -13,14 +13,8 @@ services:
       TZ: "Europe/Zurich"
       WATCHTOWER_HTTP_API_TOKEN: "" #your token
       WATCHTOWER_HTTP_API_METRICS: true
-    networks:
-      - proxy
     ports:
       - "6666:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-
-networks:
-  proxy:
-    external: true

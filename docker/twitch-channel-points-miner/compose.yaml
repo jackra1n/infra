@@ -12,11 +12,5 @@ services:
       - ./cookies:/usr/src/app/cookie s
       - ./logs:/usr/src/app/logs
       - ./run.py:/usr/src/app/run.py:ro
-    networks:
-      - proxy
     ports:
       - "5000:5000"
-
-networks:
-  proxy:
-    external: true
