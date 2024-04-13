@@ -9,20 +9,12 @@ services:
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     environment:
+      - TZ=Europe/Zurich
       - CLOUDFLARE_EMAIL= # Cloudflare email
       - CLOUDFLARE_API_KEY= # Cloudflare API key
     volumes:
       - /etc/localtime:/etc/localtime:ro
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./traefik:/etc/traefik
-      - ./letsencrypt:/letsencrypt
+      - ./config:/etc/traefik
       - ./logs:/var/log/traefik/
-    # Those labels will allow you access subdomains of your domain with SSL
-    labels:
-      - "traefik.http.routers.traefik-cert.tls.certresolver=production"
-      - "traefik.http.routers.traefik-cert.tls.domains[0].main=local.example.com"
-      - "traefik.http.routers.traefik-cert.tls.domains[0].sans=*.local.example.com"
-      - "traefik.http.routers.traefik-cert.rule=Host(`traefik.local.example.com`)"
-      - "traefik.http.routers.traefik-cert.service=api@internal"
-      - "traefik.http.routers.traefik-cert.middlewares=default-whitelist@file"
