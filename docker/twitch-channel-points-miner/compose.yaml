@@ -1,16 +1,17 @@
 services:
+
   miner:
-    image: rdavidoff/twitch-channel-points-miner-v2:latest
+    image: rdavidoff/twitch-channel-points-miner-v2:2.0.0
     container_name: twitch-points-miner
     stdin_open: true
     tty: true
-    restart: unless-stopped
+    ports:
+      - "5000:5000"
     environment:
       - TERM=xterm-256color
     volumes:
       - ./analytics:/usr/src/app/analytics
-      - ./cookies:/usr/src/app/cookie s
+      - ./cookies:/usr/src/app/cookies
       - ./logs:/usr/src/app/logs
       - ./run.py:/usr/src/app/run.py:ro
-    ports:
-      - "5000:5000"
+    restart: unless-stopped

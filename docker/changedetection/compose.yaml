@@ -1,6 +1,6 @@
 services:
   changedetection:
-    image: ghcr.io/dgtlmoon/changedetection.io:latest
+    image: ghcr.io/dgtlmoon/changedetection.io:0.50.7
     container_name: changedetection
     hostname: changedetection
     volumes:
@@ -15,8 +15,9 @@ services:
         condition: service_started
 
   playwright-chrome:
+    image: browserless/chrome:latest
+    container_name: playwright-chrome
     hostname: playwright-chrome
-    image: browserless/chrome
     restart: unless-stopped
     environment:
       - SCREEN_WIDTH=1920

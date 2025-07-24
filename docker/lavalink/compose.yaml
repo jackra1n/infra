@@ -1,0 +1,14 @@
+services:
+  lavalink:
+    image: ghcr.io/lavalink-devs/lavalink:4.1.1
+    container_name: lavalink
+    ports:
+      - 2333:2333
+    restart: unless-stopped
+    volumes:
+      - ./application.yml:/opt/Lavalink/application.yml
+      - ./plugins/:/opt/Lavalink/plugins/
+    environment:
+      - _JAVA_OPTIONS=-Xmx2G
+      - SERVER_PORT=2333
+      - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}

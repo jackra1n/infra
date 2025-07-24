@@ -1,7 +1,7 @@
 services:
   free-games-claimer:
     container_name: epic-free-games
-    image: ghcr.io/claabs/epicgames-freegames-node:latest
+    image: ghcr.io/claabs/epicgames-freegames-node:fddd24c8556c1c9e0efa75f5d5f410de450329b4
     ports:
       - 3887:3000
     volumes:

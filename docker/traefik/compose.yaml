@@ -1,17 +1,18 @@
 services:
+
   reverse-proxy:
-    image: traefik:latest
+    image: traefik:v3.3.2
     container_name: traefik
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
       # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
+      - 8080:8080
     environment:
       - TZ=Europe/Zurich
-      - CLOUDFLARE_EMAIL= # Cloudflare email
-      - CLOUDFLARE_API_KEY= # Cloudflare API key
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL} # Cloudflare account email
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY} # Cloudflare API key
     volumes:
       - /etc/localtime:/etc/localtime:ro
       # So that Traefik can listen to the Docker events

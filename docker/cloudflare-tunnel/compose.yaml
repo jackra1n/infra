@@ -1,9 +1,9 @@
 services:
   tunnel:
+    image: cloudflare/cloudflared:2025.7.0
     container_name: cloudflared-tunnel
-    image: cloudflare/cloudflared:latest
-    restart: unless-stopped
     network_mode: host
+    restart: unless-stopped
     command: tunnel run
     environment:
-      TUNNEL_TOKEN: #"mytokengoeshere"
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
