@@ -1,0 +1,23 @@
+name: Lint Docker Compose YAML
+
+on:
+  push:
+    paths:
+      - 'docker/**/compose.yaml'
+  pull_request:
+    paths:
+      - 'docker/**/compose.yaml'
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Lint Docker Compose YAML files
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_file_or_dir: 'docker'
+          yamllint_strict: true
+          yamllint_comment: false
+          yamllint_config_filepath: '.yamllint.yml'

@@ -1,5 +1,5 @@
 services:
-  
+
   plexanisync:
     image: ghcr.io/rickdb/plexanisync:1.4.3
     container_name: plexanisync

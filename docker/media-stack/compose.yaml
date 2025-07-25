@@ -8,7 +8,7 @@ services:
     volumes:
       - ./config/prowlarr-config:/config
     ports:
-      - "9696:9696"
+      - 9696:9696
     restart: unless-stopped
 
   sonarr:
@@ -21,7 +21,7 @@ services:
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
-      - "8989:8989"
+      - 8989:8989
     restart: unless-stopped
 
   radarr:
@@ -34,7 +34,7 @@ services:
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
-      - "7878:7878"
+      - 7878:7878
     restart: unless-stopped
 
   profilarr:
@@ -57,7 +57,7 @@ services:
       - ./config/lidarr-config:/config
       - ${DATA_FOLDER}:/data
     ports:
-      - "8686:8686"
+      - 8686:8686
     restart: unless-stopped
 
   autobrr:
@@ -94,7 +94,7 @@ services:
       - CAPTCHA_SOLVER=none
       - TZ=Europe/Zurich
     ports:
-      - "8191:8191"
+      - 8191:8191
     restart: unless-stopped
 
   plex:
@@ -103,7 +103,7 @@ services:
     network_mode: host
     environment:
       - VERSION=docker
-      - PLEX_CLAIM=${PLEX_CLAIM} # optional
+      - PLEX_CLAIM=${PLEX_CLAIM}  # optional
     volumes:
       - ./config/plex-config:/config
       - ${DATA_FOLDER}/media:/media
@@ -120,7 +120,7 @@ services:
     volumes:
       - ./config/tautulli-config:/config
     ports:
-      - "8181:8181"
+      - 8181:8181
     restart: unless-stopped
 
   overseerr:
@@ -131,15 +131,15 @@ services:
     volumes:
       - ./config/overseerr-config:/app/config
     ports:
-      - "5055:5055"
+      - 5055:5055
     restart: unless-stopped
 
   cross-seed:
     image: ghcr.io/cross-seed/cross-seed:6.13.1
     container_name: cross-seed
-    user: 1000:1000 # optional but recommended
+    user: 1000:1000  # optional but recommended
     ports:
-      - "2468:2468"
+      - 2468:2468
     volumes:
       - ./config/crossseed-config:/config
       - ./config/qbittorrent-config/data/BT_backup/:/data/torrent_dir:ro
@@ -161,7 +161,7 @@ services:
       - VPN_LAN_LEAK_ENABLED=false
       - VPN_EXPOSE_PORTS_ON_LAN
       - VPN_AUTO_PORT_FORWARD=true
-      - VPN_AUTO_PORT_FORWARD_TO_PORTS= #
+      - VPN_AUTO_PORT_FORWARD_TO_PORTS=  #
       - VPN_KEEP_LOCAL_DNS=false
       - VPN_FIREWALL_TYPE=auto
       - VPN_HEALTHCHECK_ENABLED=false

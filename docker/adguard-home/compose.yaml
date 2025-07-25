@@ -4,12 +4,12 @@ services:
     container_name: adguardhome
     restart: unless-stopped
     volumes:
-      - './adguard_data:/opt/adguardhome/work'
-      - './adguard_config:/opt/adguardhome/conf'
+      - ./adguard_data:/opt/adguardhome/work
+      - ./adguard_config:/opt/adguardhome/conf
     ports:
-      - '53:53/tcp'
-      - '53:53/udp'
-      - '7080:80/tcp'
-      - '7443:443/tcp'
-      - '7443:443/udp'
-      - '3000:3000/tcp'
+      - 53:53/tcp
+      - 53:53/udp
+      - 7080:80/tcp
+      - 7443:443/tcp
+      - 7443:443/udp
+      - 3000:3000/tcp

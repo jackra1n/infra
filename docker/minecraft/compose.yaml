@@ -3,9 +3,9 @@ services:
     image: itzg/minecraft-server
     container_name: minecraft_server
     ports:
-      - "25565:25565"
+      - 25565:25565
     environment:
-      EULA: "FALSE" # set to TRUE to accept the EULA
+      EULA: "FALSE"  # set to TRUE to accept the EULA
       TYPE: PAPER
       VIEW_DISTANCE: 18
       MEMORY: 6G

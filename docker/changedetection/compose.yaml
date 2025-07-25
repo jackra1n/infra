@@ -30,5 +30,5 @@ services:
       - CHROME_REFRESH_TIME=600000
       - DEFAULT_BLOCK_ADS=true
       - DEFAULT_STEALTH=true
-#     Ignore HTTPS errors, like for self-signed certs
+      # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
