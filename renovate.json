@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "assignees": ["jackra1n"],
+  "labels": ["renovate"],
+  "prHourlyLimit": 0,
+  "configMigration": true,
+  "docker": {
+    "digest": {
+      "enabled": true
+    }
+  }
+}

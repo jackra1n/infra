@@ -1,0 +1,24 @@
+name: Renovate
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # every day at 12:00 PM UTC
+
+  push:
+    branches:
+      - main # run on pushes to main branch
+
+  workflow_dispatch: # allow manual trigger
+            
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@4.2.2
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v43.0.4
+        with:
+          configurationFile: renovate.json
+          token: ${{ secrets.GITHUB_TOKEN }}
