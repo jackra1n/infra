@@ -13,5 +13,15 @@
     "digest": {
       "enabled": true
     }
-  }
+  },
+  "packageRules": [
+    {
+      "description": "Ignore Immich database and Redis images - managed manually",
+      "matchPackageNames": [
+        "docker.io/valkey/valkey",
+        "ghcr.io/immich-app/postgres"
+      ],
+      "enabled": false
+    }
+  ]
 }
