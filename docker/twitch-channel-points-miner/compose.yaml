@@ -1,5 +1,4 @@
 services:
-
   miner:
     image: rdavidoff/twitch-channel-points-miner-v2:2.0.0
     container_name: twitch-points-miner

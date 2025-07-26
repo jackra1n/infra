@@ -1,5 +1,4 @@
 services:
-
   broker:
     image: docker.io/library/redis:8
     container_name: paperless_redis

@@ -1,5 +1,4 @@
 services:
-
   reverse-proxy:
     image: traefik:v3.3.2
     container_name: traefik
