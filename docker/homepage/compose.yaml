@@ -8,3 +8,7 @@ services:
     volumes:
       - ./config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro  # (optional) For docker integrations
+      # if you want homepage to show disk space usage
+      - ${DATA_FOLDER}:/disk1:ro
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
