@@ -5,13 +5,22 @@
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
-  "assignees": ["jackra1n"],
-  "labels": ["renovate"],
+  "assignees": [
+    "jackra1n"
+  ],
+  "labels": [
+    "renovate"
+  ],
   "prHourlyLimit": 0,
   "configMigration": true,
-  "docker": {
-    "digest": {
-      "enabled": true
+  "packageRules": [
+    {
+      "matchCategories": [
+        "docker"
+      ],
+      "digest": {
+        "enabled": true
+      }
     }
-  }
+  ]
 }
