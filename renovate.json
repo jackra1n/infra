@@ -5,15 +5,14 @@
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
-  "assignees": ["jackra1n"],
-  "labels": ["renovate"],
+  "assignees": [
+    "jackra1n"
+  ],
+  "labels": [
+    "renovate"
+  ],
   "prHourlyLimit": 0,
   "configMigration": true,
-  "docker": {
-    "digest": {
-      "enabled": true
-    }
-  },
   "packageRules": [
     {
       "description": "Ignore Immich database and Redis images - managed manually",
