@@ -1,0 +1,32 @@
+services:
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:1.18.4
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    restart: unless-stopped
+    ports:
+      - 8120:8120
+    environment:
+      PERIPHERY_ROOT_DIRECTORY: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+      ## Pass the same passkey as used by the Komodo Core connecting to this Periphery agent.
+      PERIPHERY_PASSKEYS: ${PERIPHERY_PASSKEYS:-komodo-passkey}
+      ## Make server run over https
+      PERIPHERY_SSL_ENABLED: true
+      ## Specify whether to disable the terminals feature
+      ## and disallow remote shell access (inside the Periphery container).
+      PERIPHERY_DISABLE_TERMINALS: false
+      ## If the disk size is overreporting, can use one of these to
+      ## whitelist / blacklist the disks to filter them, whichever is easier.
+      ## Accepts comma separated list of paths.
+      ## Usually whitelisting just /etc/hostname gives correct size for single root disk.
+      PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
+      DOCKER_DATA_DIR: ${DOCKER_DATA_DIR:-/opt/infra-data}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      ## Allow Periphery to see processes outside of container
+      - /proc:/proc
+      ## Specify the Periphery agent root directory.
+      ## Must be the same inside and outside the container,
+      - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+      ## Custom location for docker compose repo
+      - ${PERIPHERY_ADDITIONAL_DIRECTORY}:${PERIPHERY_ADDITIONAL_DIRECTORY}
