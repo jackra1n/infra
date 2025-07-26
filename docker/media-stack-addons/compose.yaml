@@ -7,9 +7,9 @@ services:
     ports:
       - 2468:2468
     volumes:
-      - ./config/crossseed-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/crossseed-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/cross-seed:/data/cross-seed
       - ${QBITTORRENT_CONFIG}/data/BT_backup/:/data/torrent_dir:ro
-      - ./data/cross-seed:/data/cross-seed
       - ${DATA_FOLDER}/torrents:/data/torrents
     command: daemon
     restart: unless-stopped
@@ -21,7 +21,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/autobrr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/autobrr-config:/config
     ports:
       - 7474:7474
     restart: unless-stopped

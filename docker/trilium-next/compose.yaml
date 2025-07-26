@@ -6,6 +6,6 @@ services:
     ports:
       - 3390:8080
     volumes:
-      - ./data:/home/node/trilium-data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/home/node/trilium-data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

@@ -4,7 +4,7 @@ services:
     container_name: changedetection
     hostname: changedetection
     volumes:
-      - ./changedetection-data:/datastore
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/datastore:/datastore
     ports:
       - 5005:5000
     restart: unless-stopped

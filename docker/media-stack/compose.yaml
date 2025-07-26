@@ -6,7 +6,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/prowlarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -17,7 +17,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/sonarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
@@ -30,7 +30,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/radarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
@@ -43,7 +43,7 @@ services:
     ports:
       - 6868:6868
     volumes:
-      - ./config/profilarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
     environment:
       - TZ=Europe/Zurich
     restart: unless-stopped
@@ -54,7 +54,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/lidarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
       - ${DATA_FOLDER}:/data
     ports:
       - 8686:8686
@@ -66,7 +66,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/bazarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
@@ -93,7 +93,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}  # optional
     volumes:
-      - ./config/plex-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/plex-config:/config
       - ${DATA_FOLDER}/media:/media
       - ${ADDITIONAL_SHARE}:/media-synology
     devices:
@@ -106,7 +106,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/tautulli-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
     ports:
       - 8181:8181
     restart: unless-stopped
@@ -117,7 +117,7 @@ services:
     environment:
       - TZ=Europe/Zurich
     volumes:
-      - ./config/overseerr-config:/app/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -152,6 +152,6 @@ services:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.all.disable_ipv6=1
     volumes:
-      - ./config/qbittorrent-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/qbittorrent-config:/config
       - ${DATA_FOLDER}/torrents:/data/torrents
     restart: unless-stopped

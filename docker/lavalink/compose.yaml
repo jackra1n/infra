@@ -6,8 +6,8 @@ services:
       - 2333:2333
     restart: unless-stopped
     volumes:
-      - ./application.yml:/opt/Lavalink/application.yml
-      - ./plugins/:/opt/Lavalink/plugins/
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/application.yml:/opt/Lavalink/application.yml
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/plugins/:/opt/Lavalink/plugins/
     environment:
       - _JAVA_OPTIONS=-Xmx2G
       - SERVER_PORT=2333

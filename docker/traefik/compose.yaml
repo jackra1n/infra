@@ -17,5 +17,5 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config:/etc/traefik
-      - ./logs:/var/log/traefik/
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/etc/traefik
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/var/log/traefik/

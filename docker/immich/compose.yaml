@@ -16,7 +16,7 @@ services:
       file: hwaccel.transcoding.yml
       service: quicksync
     volumes:
-      - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/library:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -58,7 +58,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data
     restart: always
 
 volumes:

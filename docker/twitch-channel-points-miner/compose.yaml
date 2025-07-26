@@ -10,8 +10,8 @@ services:
     environment:
       - TERM=xterm-256color
     volumes:
-      - ./analytics:/usr/src/app/analytics
-      - ./cookies:/usr/src/app/cookies
-      - ./logs:/usr/src/app/logs
-      - ./run.py:/usr/src/app/run.py:ro
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/analytics:/usr/src/app/analytics
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/cookies:/usr/src/app/cookies
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/usr/src/app/logs
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/run.py:/usr/src/app/run.py:ro
     restart: unless-stopped

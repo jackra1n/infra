@@ -6,7 +6,7 @@ services:
     ports:
       - 3210:3000
     volumes:
-      - ./config:/app/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro  # (optional) For docker integrations
       # if you want homepage to show disk space usage
       - ${DATA_FOLDER}:/disk1:ro

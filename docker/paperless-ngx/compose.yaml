@@ -5,21 +5,21 @@ services:
     container_name: paperless_redis
     restart: unless-stopped
     volumes:
-      - ./data/redisdata:/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/redisdata:/data
 
   db:
     image: postgres:16-alpine
     container_name: paperless_postgres
     restart: unless-stopped
     volumes:
-      - ./data/pgdata:/var/lib/postgresql/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.17.1
     container_name: paperless
     restart: unless-stopped
     depends_on:
@@ -28,10 +28,10 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./data/data:/usr/src/paperless/data
-      - ./data/media:/usr/src/paperless/media
-      - ./data/export:/usr/src/paperless/export
-      - ./data/consume:/usr/src/paperless/consume
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/data:/usr/src/paperless/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/media:/usr/src/paperless/media
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/export:/usr/src/paperless/export
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/consume:/usr/src/paperless/consume
     env_file: compose.env
     environment:
       PAPERLESS_REDIS: redis://broker:6379

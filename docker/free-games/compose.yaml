@@ -5,7 +5,7 @@ services:
     ports:
       - 3887:3000
     volumes:
-      - ./config/:/usr/app/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/:/usr/app/config
     environment:
       - TZ=Europe/Zurich
     restart: unless-stopped
