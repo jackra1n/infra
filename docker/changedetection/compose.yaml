@@ -16,7 +16,7 @@ services:
 
   playwright-chrome:
     image: browserless/chrome:latest
-    container_name: playwright-chrome
+    container_name: change-pw-chrome
     hostname: playwright-chrome
     restart: unless-stopped
     environment:
