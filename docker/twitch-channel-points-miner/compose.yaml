@@ -14,3 +14,5 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/usr/src/app/logs
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/run.py:/usr/src/app/run.py:ro
     restart: unless-stopped
+    dns:
+      - 1.1.1.1
