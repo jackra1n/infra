@@ -1,11 +1,10 @@
 services:
-
   uptimekuma:
     image: louislam/uptime-kuma:1.23.16
     container_name: uptimekuma
     ports:
       - 3001:3001
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/uptimekuma-data:/app/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
