@@ -17,7 +17,7 @@ services:
     ports:
       - 3654:3000
     volumes:
-      - .${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data/data
     restart: unless-stopped
     depends_on:
       - postgres
