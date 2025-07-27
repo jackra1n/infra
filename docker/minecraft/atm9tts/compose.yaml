@@ -9,4 +9,4 @@ services:
     stdin_open: true
     restart: unless-stopped
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
+      - ${DOCKER_DATA_DIR:?error}/minecraft/${COMPOSE_PROJECT_NAME:?error}/data:/data
