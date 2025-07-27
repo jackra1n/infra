@@ -1,0 +1,21 @@
+services:
+  backrest:
+    image: garethgeorge/backrest:v1.8.1
+    container_name: backrest
+    hostname: backrest
+    restart: unless-stopped
+    ports:
+      - 9898:9898
+    environment:
+      - BACKREST_DATA=/data
+      - BACKREST_CONFIG=/config/config.json
+      - XDG_CACHE_HOME=/cache
+      - TMPDIR=/tmp
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/cache:/cache
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/tmp:/tmp
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/rclone:/root/.config/rclone
+      - ${BACKUP_DATA_DIR:?error}:/userdata
