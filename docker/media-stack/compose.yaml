@@ -3,6 +3,9 @@ services:
     image: ghcr.io/hotio/prowlarr:release-1.37.0.5076
     container_name: prowlarr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
@@ -14,6 +17,9 @@ services:
     image: ghcr.io/hotio/sonarr:release-4.0.15.2941
     container_name: sonarr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
@@ -27,6 +33,9 @@ services:
     image: ghcr.io/hotio/radarr:release-5.26.2.10099
     container_name: radarr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
@@ -51,6 +60,9 @@ services:
     image: ghcr.io/hotio/lidarr:release-2.12.4.4658
     container_name: lidarr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
@@ -63,6 +75,9 @@ services:
     image: ghcr.io/hotio/bazarr:release-1.5.2
     container_name: bazarr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
@@ -103,6 +118,9 @@ services:
     image: ghcr.io/hotio/tautulli:release-2.15.2
     container_name: tautulli
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
@@ -114,6 +132,9 @@ services:
     image: ghcr.io/hotio/overseerr:release-1.34.0
     container_name: overseerr
     environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
       - TZ=Europe/Zurich
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
