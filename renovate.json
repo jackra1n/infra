@@ -21,6 +21,13 @@
         "ghcr.io/immich-app/postgres"
       ],
       "enabled": false
+    },
+    {
+      "matchPackageNames": [
+        "immich-server",
+        "immich-machine-learning"
+      ],
+      "groupName": "immich"
     }
   ]
 }
