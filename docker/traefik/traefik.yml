@@ -1,0 +1,55 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false  # true by default
+
+accesslog:
+  format: common  # common, json, logfmt
+  filePath: /var/log/traefik/access.log
+
+api:
+  dashboard: true  # true by default
+
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  production:
+    acme:
+      email: you@email.com
+      storage: /etc/traefik/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        delayBeforeCheck: 0
+        resolvers:
+          - 1.1.1.1:53
+          - 8.8.8.8:53
+
+  staging:
+    acme:
+      email: you@email.com
+      storage: /etc/traefik/acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory
+      httpChallenge:
+        entryPoint: web
+
+# (Optional) Overwrite Default Certificates
+tls:
+  # (Optional) Disable TLS version 1.0 and 1.1
+  options:
+    default:
+      minVersion: VersionTLS12
+
+providers:
+  docker:
+    exposedByDefault: false  # Default is true
+  file:
+    directory: /etc/traefik
+    watch: true
