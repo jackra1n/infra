@@ -16,7 +16,7 @@ services:
       file: hwaccel.transcoding.yml
       service: quicksync
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/library:/usr/src/app/upload
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/library:/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
