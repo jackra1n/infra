@@ -11,12 +11,12 @@ name: immich
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:v1.136.0
+    image: ghcr.io/immich-app/immich-server:v1.137.1
     extends:
       file: hwaccel.transcoding.yml
       service: quicksync
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/library:/usr/src/app/upload
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/library:/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
@@ -31,7 +31,7 @@ services:
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    image: ghcr.io/immich-app/immich-machine-learning:v1.136.0
+    image: ghcr.io/immich-app/immich-machine-learning:v1.137.1
     volumes:
       - model-cache:/cache
     env_file:
