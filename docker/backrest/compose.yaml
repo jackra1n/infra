@@ -1,6 +1,6 @@
 services:
   backrest:
-    image: garethgeorge/backrest:v1.9.0
+    image: garethgeorge/backrest:v1.9.1
     container_name: backrest
     hostname: backrest
     restart: unless-stopped
