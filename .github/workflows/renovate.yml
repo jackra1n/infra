@@ -16,7 +16,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@4.2.2
+        uses: actions/checkout@4.3.0
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v43.0.7
         with:
