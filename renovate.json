@@ -23,11 +23,19 @@
       "enabled": false
     },
     {
+      "description": "Group Immich updates together",
       "matchPackageNames": [
         "ghcr.io/immich-app/immich-server",
         "ghcr.io/immich-app/immich-machine-learning"
       ],
       "groupName": "immich"
+    },
+    {
+      "description": "Handle hotio Docker tags like release-<version> and keep channel stable",
+      "matchDatasources": ["docker"],
+      "matchPackagePrefixes": ["ghcr.io/hotio/"],
+      "versionCompatibility": "^(?<compatibility>release|testing)-v?(?<version>\\d+\\.\\d+\\.\\d+(?:\\.\\d+)?(?:-[\\w\\d.-]+)?)$",
+      "versioning": "loose"
     }
   ]
 }
