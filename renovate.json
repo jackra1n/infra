@@ -13,6 +13,8 @@
   ],
   "prHourlyLimit": 0,
   "configMigration": true,
+  "separateMultipleMajor": true,
+  "separateMinorPatch": true,
   "packageRules": [
     {
       "description": "Ignore Immich database and Redis images - managed manually",
@@ -29,6 +31,16 @@
         "ghcr.io/immich-app/immich-machine-learning"
       ],
       "groupName": "immich"
+    },
+    {
+      "description": "Separate updates by Docker stack directory",
+      "matchFileNames": [
+        "docker/*/compose.yaml"
+      ],
+      "separateMajorMinor": false,
+      "separateMultipleMajor": false,
+      "separateMinorPatch": false,
+      "groupName": "{{parentDir}}"
     },
     {
       "description": "Handle hotio Docker tags like release-<version> and keep channel stable",
