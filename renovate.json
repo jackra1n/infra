@@ -41,7 +41,7 @@
       "separateMultipleMajor": false,
       "separateMinorPatch": false,
       "groupName": "{{parentDir}}",
-      "prTitle": "Update {{parentDir}} {{depNameShort}} Docker tag to {{newVersion}}"
+      "prTitle": "Update {{parentDir}} {{depName}} Docker tag to {{newVersion}}"
     },
     {
       "description": "Handle hotio Docker tags like release-<version> and keep channel stable",
