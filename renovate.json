@@ -33,15 +33,16 @@
       "groupName": "immich"
     },
     {
-      "description": "Separate updates by Docker stack directory",
+      "description": "Separate PRs per stack directory for Docker Compose updates",
+      "matchManagers": ["docker-compose"],
+      "additionalBranchPrefix": "{{parentDir}}-"
+    },
+    {
+      "description": "Include stack name in commit messages for Docker stacks",
       "matchFileNames": [
         "docker/*/compose.yaml"
       ],
-      "separateMajorMinor": false,
-      "separateMultipleMajor": false,
-      "separateMinorPatch": false,
-      "groupName": "{{parentDir}}",
-      "commitMessageTopic": "{{#if groupName}}{{groupName}} {{/if}}{{depName}} Docker tag"
+      "commitMessageTopic": "{{parentDir}} {{depName}} Docker tag"
     },
     {
       "description": "Handle hotio Docker tags like release-<version> and keep channel stable",
