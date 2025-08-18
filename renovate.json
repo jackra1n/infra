@@ -33,6 +33,17 @@
       "groupName": "immich"
     },
     {
+      "description": "Group Komodo updates together",
+      "matchPackageNames": [
+        "ghcr.io/moghtech/komodo-core",
+        "ghcr.io/moghtech/komodo-periphery"
+      ],
+      "matchFileNames": [
+        "docker/komodo/compose.yaml"
+      ],
+      "groupName": "komodo"
+    },
+    {
       "description": "Separate PRs per stack directory for Docker Compose updates",
       "matchManagers": ["docker-compose"],
       "additionalBranchPrefix": "{{parentDir}}-"
