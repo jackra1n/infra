@@ -22,4 +22,4 @@ services:
       LISTEN: /beszel_socket/beszel.sock
       HUB_URL: http://localhost:8090
       TOKEN: ${BESZEL_AGENT_TOKEN:?error}
-      KEY: "${BESZEL_AGENT_KEY:?error}"
+      KEY: ${BESZEL_AGENT_KEY:?error}
