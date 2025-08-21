@@ -46,7 +46,7 @@ services:
     restart: unless-stopped
 
   profilarr:
-    image: santiagosayshey/profilarr:v1.0.1
+    image: santiagosayshey/profilarr:v1.1.2
     container_name: profilarr
     ports:
       - 6868:6868
