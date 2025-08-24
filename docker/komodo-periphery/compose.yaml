@@ -1,6 +1,6 @@
 services:
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:1.19.0
+    image: ghcr.io/moghtech/komodo-periphery:1.19.1
     container_name: komodo-periphery
     labels:
       komodo.skip:  # Prevent Komodo from stopping with StopAllContainers

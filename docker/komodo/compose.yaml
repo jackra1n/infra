@@ -14,7 +14,7 @@ services:
       komodo.skip:  # Prevent Komodo from stopping with StopAllContainers
 
   core:
-    image: ghcr.io/moghtech/komodo-core:1.19.0
+    image: ghcr.io/moghtech/komodo-core:1.19.1
     container_name: komodo-core
     restart: unless-stopped
     depends_on:
@@ -32,7 +32,7 @@ services:
       komodo.skip:  # Prevent Komodo from stopping with StopAllContainers
 
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:1.19.0
+    image: ghcr.io/moghtech/komodo-periphery:1.19.1
     container_name: komodo-periphery
     restart: unless-stopped
     env_file: ./.env
