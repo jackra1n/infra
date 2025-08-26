@@ -44,6 +44,17 @@
       "groupName": "komodo"
     },
     {
+      "description": "Group Beszel updates together",
+      "matchPackageNames": [
+        "henrygd/beszel",
+        "henrygd/beszel-agent"
+      ],
+      "matchFileNames": [
+        "docker/beszel/compose.yaml"
+      ],
+      "groupName": "beszel"
+    },
+    {
       "description": "Separate PRs per stack directory for Docker Compose updates",
       "matchManagers": ["docker-compose"],
       "additionalBranchPrefix": "{{parentDir}}-"
