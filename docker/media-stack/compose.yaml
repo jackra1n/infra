@@ -46,13 +46,15 @@ services:
     restart: unless-stopped
 
   profilarr:
-    image: santiagosayshey/profilarr:v1.1.2
+    image: santiagosayshey/profilarr:v1.1.3
     container_name: profilarr
     ports:
       - 6868:6868
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Zurich
     restart: unless-stopped
 
