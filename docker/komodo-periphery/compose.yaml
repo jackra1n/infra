@@ -2,11 +2,8 @@ services:
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:1.19.1
     container_name: komodo-periphery
-    labels:
-      komodo.skip:  # Prevent Komodo from stopping with StopAllContainers
     restart: unless-stopped
-    ports:
-      - 8120:8120
+    network_mode: host
     environment:
       PERIPHERY_ROOT_DIRECTORY: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       ## Pass the same passkey as used by the Komodo Core connecting to this Periphery agent.
@@ -31,3 +28,5 @@ services:
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       ## Custom location for docker compose repo
       - ${PERIPHERY_ADDITIONAL_DIRECTORY}:${PERIPHERY_ADDITIONAL_DIRECTORY}
+    labels:
+      komodo.skip:  # Prevent Komodo from stopping with StopAllContainers

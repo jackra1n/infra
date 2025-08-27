@@ -35,6 +35,7 @@ services:
     image: ghcr.io/moghtech/komodo-periphery:1.19.1
     container_name: komodo-periphery
     restart: unless-stopped
+    network_mode: host
     env_file: ./.env
     volumes:
       ## Mount external docker socket
