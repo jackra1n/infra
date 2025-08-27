@@ -53,6 +53,8 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
     environment:
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Zurich
     restart: unless-stopped
 
