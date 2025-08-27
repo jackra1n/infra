@@ -159,37 +159,3 @@ services:
       interval: 15s
       retries: 3
     restart: unless-stopped
-
-  qbittorrent:
-    container_name: qbittorrent
-    image: ghcr.io/hotio/qbittorrent:release-5.1.2
-    ports:
-      - 8070:8070
-    environment:
-      - VPN_ENABLED=true
-      - VPN_CONF=wg0-bak
-      - VPN_PROVIDER=proton
-      - VPN_LAN_NETWORK=192.168.8.0/24
-      - VPN_LAN_LEAK_ENABLED=false
-      - VPN_EXPOSE_PORTS_ON_LAN
-      - VPN_AUTO_PORT_FORWARD=true
-      - VPN_AUTO_PORT_FORWARD_TO_PORTS=  #
-      - VPN_KEEP_LOCAL_DNS=false
-      - VPN_FIREWALL_TYPE=auto
-      - VPN_HEALTHCHECK_ENABLED=false
-      - PRIVOXY_ENABLED=false
-      - UNBOUND_ENABLED=false
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Zurich
-      - WEBUI_PORTS=8070/tcp,8070/udp
-    cap_add:
-      - NET_ADMIN
-    sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
-      - net.ipv6.conf.all.disable_ipv6=1
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/qbittorrent-config:/config
-      - ${DATA_FOLDER}/torrents:/data/torrents
-    restart: unless-stopped
