@@ -9,7 +9,7 @@ On my server, I use a global `DOCKER_DATA_DIR` environment variable to define th
 
 The Docker Compose files are pinned to specific image versions. I use Renovate bot to automatically check for updates. When a new version of a Docker image is available, Renovate opens a pull request.
 
-Once a pull request is merged into the `main` branch, a webhook notifies my home Komodo instance. This triggers a deployment script that pulls the latest repository changes and redeploys the affected Docker stacks.
+Once a pull request is merged into the `main` branch, a webhook notifies my home [Komodo](https://github.com/moghtech/komodo) instance. This triggers a deployment script that pulls the latest repository changes and redeploys the affected Docker stacks.
 
 ## ⚠️ Disclaimer
 
