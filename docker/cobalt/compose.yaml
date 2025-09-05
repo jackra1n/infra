@@ -1,6 +1,6 @@
 services:
   cobalt-api:
-    image: ghcr.io/imputnet/cobalt:11.4.2
+    image: ghcr.io/imputnet/cobalt:11.4.3
     container_name: cobalt-api
     init: true
     read_only: true
