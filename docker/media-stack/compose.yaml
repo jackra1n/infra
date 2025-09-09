@@ -117,7 +117,7 @@ services:
     restart: unless-stopped
 
   tautulli:
-    image: ghcr.io/hotio/tautulli:release-2.15.3
+    image: ghcr.io/hotio/tautulli:release-2.16.0
     container_name: tautulli
     environment:
       - PUID=1000
