@@ -7,3 +7,5 @@ rules:
     max: 120
   quoted-strings:
     required: only-when-needed
+  comments:
+    min-spaces-from-content: 1
