@@ -1,0 +1,88 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:1.42.1
+    container_name: plex
+    network_mode: host
+    environment:
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM} # optional
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/plex-config:/config
+      - ${DATA_FOLDER}/media:/media
+      - ${ADDITIONAL_SHARE}:/media-synology
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr:release-2.0.5.5160
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  sonarr:
+    image: ghcr.io/hotio/sonarr:release-4.0.15.2941
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: ghcr.io/hotio/radarr:release-5.27.5.10198
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  lidarr:
+    image: ghcr.io/hotio/lidarr:release-2.13.3.4711
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
+      - ${DATA_FOLDER}:/data
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.0
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Europe/Zurich
+    ports:
+      - 8191:8191
+    restart: unless-stopped
