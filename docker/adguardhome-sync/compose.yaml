@@ -1,6 +1,6 @@
 services:
   adguardhome-sync:
-    image: ghcr.io/bakito/adguardhome-sync:v0.8.0
+    image: ghcr.io/bakito/adguardhome-sync:v0.8.1
     container_name: adguardhome-sync
     command: run --config /config/adguardhome-sync.yaml
     volumes:
