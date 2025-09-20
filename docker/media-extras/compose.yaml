@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
 
   bazarr:
-    image: ghcr.io/hotio/bazarr:release-1.5.2
+    image: ghcr.io/hotio/bazarr:release-1.5.3
     container_name: bazarr
     environment:
       - PUID=1000
