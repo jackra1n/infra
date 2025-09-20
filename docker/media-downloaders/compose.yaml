@@ -8,11 +8,10 @@ services:
       - VPN_ENABLED=true
       - VPN_CONF=wg0-bak
       - VPN_PROVIDER=proton
-      - VPN_LAN_NETWORK=192.168.8.0/24
       - VPN_LAN_LEAK_ENABLED=false
       - VPN_EXPOSE_PORTS_ON_LAN
       - VPN_AUTO_PORT_FORWARD=true
-      - VPN_AUTO_PORT_FORWARD_TO_PORTS=  #
+      - VPN_AUTO_PORT_FORWARD_TO_PORTS= #
       - VPN_KEEP_LOCAL_DNS=false
       - VPN_FIREWALL_TYPE=auto
       - VPN_HEALTHCHECK_ENABLED=false
