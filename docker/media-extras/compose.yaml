@@ -42,6 +42,20 @@ services:
       - 8181:8181
     restart: unless-stopped
 
+  qui:
+    image: ghcr.io/autobrr/qui:v1.0.0
+    container_name: qui
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Zurich
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
+    ports:
+      - 7476:7476
+    restart: unless-stopped
+
   overseerr:
     image: ghcr.io/hotio/overseerr:release-1.34.0
     container_name: overseerr
