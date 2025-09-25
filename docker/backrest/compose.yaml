@@ -19,3 +19,4 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/tmp:/tmp
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/rclone:/root/.config/rclone
       - ${BACKUP_DATA_DIR:?error}:/userdata
+      - ${BACKUP_DATA_DEST:?error}:/backups
