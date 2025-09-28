@@ -1,6 +1,6 @@
 services:
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:1.19.4
+    image: ghcr.io/moghtech/komodo-periphery:1.19.5
     container_name: komodo-periphery
     restart: unless-stopped
     network_mode: host
