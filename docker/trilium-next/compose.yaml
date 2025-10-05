@@ -1,6 +1,6 @@
 services:
   trilium:
-    image: ghcr.io/triliumnext/trilium:v0.99.0
+    image: ghcr.io/triliumnext/trilium:v0.99.1
     container_name: trilium-next
     restart: unless-stopped
     ports:
