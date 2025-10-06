@@ -1,6 +1,6 @@
 services:
   beszel:
-    image: henrygd/beszel:0.13.0
+    image: henrygd/beszel:0.13.1
     container_name: beszel
     restart: unless-stopped
     ports:
@@ -10,7 +10,7 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket
 
   beszel-agent:
-    image: henrygd/beszel-agent:0.13.0
+    image: henrygd/beszel-agent:0.13.1
     container_name: beszel-agent
     restart: unless-stopped
     network_mode: host
