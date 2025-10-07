@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   qui:
-    image: ghcr.io/autobrr/qui:v1.2.0
+    image: ghcr.io/autobrr/qui:v1.3.0
     container_name: qui
     environment:
       - PUID=1000
