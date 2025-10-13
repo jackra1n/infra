@@ -53,7 +53,9 @@
     },
     {
       "description": "Separate PRs per stack directory for Docker Compose updates",
-      "matchManagers": ["docker-compose"],
+      "matchManagers": [
+        "docker-compose"
+      ],
       "additionalBranchPrefix": "{{parentDir}}-"
     },
     {
@@ -85,7 +87,7 @@
       ],
       "automerge": true,
       "automergeType": "pr",
-      "requiredStatusChecks": null
+      "ignoreTests": true
     }
   ]
 }
