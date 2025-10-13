@@ -5,9 +5,6 @@
   ],
   "dependencyDashboard": true,
   "dependencyDashboardTitle": "Renovate Dashboard",
-  "assignees": [
-    "jackra1n"
-  ],
   "labels": [
     "renovate"
   ],
@@ -76,6 +73,19 @@
       "matchPackageNames": [
         "ghcr.io/hotio/{/,}**"
       ]
+    },
+    {
+      "description": "Auto-merge patch updates for trusted packages",
+      "matchPackageNames": [
+        "renovatebot/github-action",
+        "ghcr.io/dgtlmoon/changedetection.io"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "requiredStatusChecks": null
     }
   ]
 }
