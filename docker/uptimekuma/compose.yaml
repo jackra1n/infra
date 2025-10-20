@@ -1,6 +1,6 @@
 services:
   uptimekuma:
-    image: louislam/uptime-kuma:1.23.16
+    image: louislam/uptime-kuma:1.23.17
     container_name: uptimekuma
     ports:
       - 3001:3001
