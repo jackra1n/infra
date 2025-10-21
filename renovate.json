@@ -80,7 +80,10 @@
       "description": "Auto-merge patch updates for trusted packages",
       "matchPackageNames": [
         "renovatebot/github-action",
-        "ghcr.io/dgtlmoon/changedetection.io"
+        "ghcr.io/dgtlmoon/changedetection.io",
+        "ghcr.io/triliumnext/trilium",
+        "henrygd/beszel",
+        "henrygd/beszel-agent"
       ],
       "matchUpdateTypes": [
         "patch"
