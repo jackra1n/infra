@@ -8,6 +8,8 @@ on:
     paths:
       - 'docker/**/compose.yaml'
 
+  workflow_dispatch:
+
 jobs:
   yamllint:
     runs-on: ubuntu-latest
