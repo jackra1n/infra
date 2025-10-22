@@ -83,7 +83,8 @@
         "ghcr.io/dgtlmoon/changedetection.io",
         "ghcr.io/triliumnext/trilium",
         "henrygd/beszel",
-        "henrygd/beszel-agent"
+        "henrygd/beszel-agent",
+        "ghcr.io/paperless-ngx/paperless-ngx"
       ],
       "matchUpdateTypes": [
         "patch"
