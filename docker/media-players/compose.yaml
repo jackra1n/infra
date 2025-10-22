@@ -1,0 +1,15 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:1.42.2
+    container_name: plex
+    network_mode: host
+    environment:
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM} # optional
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/plex-config:/config
+      - ${DATA_FOLDER}/media:/media
+      - ${ADDITIONAL_SHARE}:/media-synology
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
