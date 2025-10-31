@@ -84,7 +84,9 @@
         "ghcr.io/triliumnext/trilium",
         "henrygd/beszel",
         "henrygd/beszel-agent",
-        "ghcr.io/paperless-ngx/paperless-ngx"
+        "ghcr.io/paperless-ngx/paperless-ngx",
+        "cloudflare/cloudflared",
+        "ghcr.io/autobrr/qui"
       ],
       "matchUpdateTypes": [
         "patch"
