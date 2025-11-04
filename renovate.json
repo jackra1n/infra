@@ -86,7 +86,10 @@
         "henrygd/beszel-agent",
         "ghcr.io/paperless-ngx/paperless-ngx",
         "cloudflare/cloudflared",
-        "ghcr.io/autobrr/qui"
+        "ghcr.io/autobrr/qui",
+        "ghcr.io/cross-seed/cross-seed",
+        "ghcr.io/gethomepage/homepage",
+        "lscr.io/linuxserver/syncthing"
       ],
       "matchUpdateTypes": [
         "patch"
