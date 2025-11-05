@@ -78,13 +78,13 @@
     },
     {
       "description": "Auto-merge patch updates",
-      "excludePackageNames": [],
       "matchUpdateTypes": [
         "patch"
       ],
       "automerge": true,
       "automergeType": "pr",
-      "ignoreTests": true
+      "ignoreTests": true,
+      "matchPackageNames": []
     }
   ]
 }
