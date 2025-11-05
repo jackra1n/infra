@@ -77,20 +77,8 @@
       ]
     },
     {
-      "description": "Auto-merge patch updates for trusted packages",
-      "matchPackageNames": [
-        "renovatebot/github-action",
-        "ghcr.io/dgtlmoon/changedetection.io",
-        "ghcr.io/triliumnext/trilium",
-        "henrygd/beszel",
-        "henrygd/beszel-agent",
-        "ghcr.io/paperless-ngx/paperless-ngx",
-        "cloudflare/cloudflared",
-        "ghcr.io/autobrr/qui",
-        "ghcr.io/cross-seed/cross-seed",
-        "ghcr.io/gethomepage/homepage",
-        "lscr.io/linuxserver/syncthing"
-      ],
+      "description": "Auto-merge patch updates",
+      "matchPackageNames": [],
       "matchUpdateTypes": [
         "patch"
       ],
