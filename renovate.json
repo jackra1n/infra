@@ -78,10 +78,20 @@
     },
     {
       "description": "Auto-merge patch updates",
-      "excludePackageNames": [],
       "matchUpdateTypes": [
         "patch"
       ],
+      "automerge": true,
+      "automergeType": "pr",
+      "ignoreTests": true
+    },
+    {
+      "description": "Auto-merge minor updates for approved packages",
+      "matchPackageNames": [
+        "ghcr.io/gethomepage/homepage",
+        "cloudflare/cloudflared"
+      ],
+      "matchUpdateTypes": ["minor"],
       "automerge": true,
       "automergeType": "pr",
       "ignoreTests": true
