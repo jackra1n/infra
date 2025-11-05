@@ -78,7 +78,7 @@
     },
     {
       "description": "Auto-merge patch updates",
-      "matchPackageNames": [],
+      "excludePackageNames": [],
       "matchUpdateTypes": [
         "patch"
       ],
