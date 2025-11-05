@@ -11,7 +11,7 @@ name: immich
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:v2.2.2
+    image: ghcr.io/immich-app/immich-server:v2.2.3
     extends:
       file: hwaccel.transcoding.yml
       service: quicksync
@@ -31,7 +31,7 @@ services:
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    image: ghcr.io/immich-app/immich-machine-learning:v2.2.2
+    image: ghcr.io/immich-app/immich-machine-learning:v2.2.3
     volumes:
       - model-cache:/cache
     env_file:
