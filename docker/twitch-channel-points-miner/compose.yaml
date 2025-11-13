@@ -1,6 +1,6 @@
 services:
   miner:
-    image: rdavidoff/twitch-channel-points-miner-v2:2.0.0
+    image: rdavidoff/twitch-channel-points-miner-v2:2.0.3
     container_name: twitch-points-miner
     stdin_open: true
     tty: true
