@@ -1,3 +1,5 @@
+name: komodo-periphery
+
 services:
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:1.19.5

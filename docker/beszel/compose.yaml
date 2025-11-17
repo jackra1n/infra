@@ -1,3 +1,5 @@
+name: beszel
+
 services:
   beszel:
     image: henrygd/beszel:0.16.1

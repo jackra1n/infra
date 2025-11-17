@@ -1,3 +1,5 @@
+name: media-core
+
 services:
   prowlarr:
     image: ghcr.io/hotio/prowlarr:release-2.3.0.5236

@@ -1,3 +1,5 @@
+name: komodo
+
 services:
   mongo:
     image: mongo:8.0.15

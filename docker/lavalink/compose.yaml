@@ -1,3 +1,5 @@
+name: lavalink
+
 services:
   lavalink:
     image: ghcr.io/lavalink-devs/lavalink:4.1.1

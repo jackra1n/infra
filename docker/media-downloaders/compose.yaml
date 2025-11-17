@@ -1,3 +1,5 @@
+name: media-downloaders
+
 services:
   qbittorrent:
     image: ghcr.io/hotio/qbittorrent:release-5.1.3

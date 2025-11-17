@@ -1,3 +1,5 @@
+name: cloudflare-tunnel
+
 services:
   tunnel:
     image: cloudflare/cloudflared:2025.11.1

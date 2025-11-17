@@ -1,3 +1,5 @@
+name: media-extras
+
 services:
   profilarr:
     image: santiagosayshey/profilarr:v1.1.3

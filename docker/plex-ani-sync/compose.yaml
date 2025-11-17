@@ -1,3 +1,5 @@
+name: plex-ani-sync
+
 services:
   plexanisync:
     image: ghcr.io/rickdb/plexanisync:1.4.3

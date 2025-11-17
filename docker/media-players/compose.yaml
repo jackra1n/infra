@@ -1,3 +1,5 @@
+name: media-players
+
 services:
   plex:
     image: lscr.io/linuxserver/plex:1.42.2

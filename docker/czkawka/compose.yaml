@@ -1,3 +1,5 @@
+name: czkawka
+
 services:
   czkawka:
     image: ghcr.io/jlesage/czkawka:v25.08.1

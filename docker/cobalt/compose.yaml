@@ -1,3 +1,5 @@
+name: cobalt-api
+
 services:
   cobalt-api:
     image: ghcr.io/imputnet/cobalt:11.4.3

@@ -1,3 +1,5 @@
+name: adguardhome-sync
+
 services:
   adguardhome-sync:
     image: ghcr.io/bakito/adguardhome-sync:v0.8.2
