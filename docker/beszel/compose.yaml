@@ -2,18 +2,16 @@ services:
   beszel:
     image: henrygd/beszel:0.16.1
     container_name: beszel
-    restart: unless-stopped
-    ports:
-      - '8090:8090'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_data:/beszel_data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket
+    ports:
+      - '8090:8090'
+    restart: unless-stopped
 
   beszel-agent:
     image: henrygd/beszel-agent:0.16.1
     container_name: beszel-agent
-    restart: unless-stopped
-    network_mode: host
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_agent_data:/var/lib/beszel-agent
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket
@@ -23,3 +21,5 @@ services:
       HUB_URL: http://localhost:8090
       TOKEN: ${BESZEL_AGENT_TOKEN:?error}
       KEY: ${BESZEL_AGENT_KEY:?error}
+    network_mode: host
+    restart: unless-stopped

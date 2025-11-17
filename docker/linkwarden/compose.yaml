@@ -2,22 +2,22 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: postgres-linkwarden
-    env_file: .env
-    restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data
+    env_file: .env
+    restart: unless-stopped
 
   linkwarden:
     image: ghcr.io/linkwarden/linkwarden:v2.13.1
     container_name: linkwarden
-    env_file: .env
+    depends_on:
+      - postgres
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data/data
     environment:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       - NEXT_PUBLIC_DISABLE_REGISTRATION=true
+    env_file: .env
     ports:
       - '3654:3000'
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data/data
     restart: unless-stopped
-    depends_on:
-      - postgres

@@ -1,11 +1,11 @@
 services:
   free-games-claimer:
-    container_name: epic-free-games
     image: ghcr.io/claabs/epicgames-freegames-node:latest
-    ports:
-      - '3887:3000'
+    container_name: epic-free-games
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/:/usr/app/config
     environment:
       - TZ=Europe/Zurich
+    ports:
+      - '3887:3000'
     restart: unless-stopped

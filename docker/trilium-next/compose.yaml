@@ -2,10 +2,10 @@ services:
   trilium:
     image: ghcr.io/triliumnext/trilium:v0.99.5
     container_name: trilium-next
-    restart: unless-stopped
-    ports:
-      - '3390:8080'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/home/node/trilium-data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3390:8080'
+    restart: unless-stopped

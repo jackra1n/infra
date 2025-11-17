@@ -2,36 +2,36 @@ services:
   broker:
     image: docker.io/library/redis:8
     container_name: paperless_redis
-    restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/redisdata:/data
+    restart: unless-stopped
 
   db:
     image: postgres:16-alpine
     container_name: paperless_postgres
-    restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
+    restart: unless-stopped
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:2.19.6
     container_name: paperless
-    restart: unless-stopped
     depends_on:
-      - db
       - broker
-    ports:
-      - '8000:8000'
+      - db
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/data:/usr/src/paperless/data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/media:/usr/src/paperless/media
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/export:/usr/src/paperless/export
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/consume:/usr/src/paperless/consume
-    env_file: .env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
       PAPERLESS_DBHOST: db
+    env_file: .env
+    ports:
+      - '8000:8000'
+    restart: unless-stopped

@@ -2,6 +2,8 @@ services:
   plexanisync:
     image: ghcr.io/rickdb/plexanisync:1.4.3
     container_name: plexanisync
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - PLEX_SECTION=TV Shows
       - PLEX_URL=${PLEX_URL:-http://plex:32400}
@@ -9,6 +11,4 @@ services:
       - ANI_USERNAME=${ANI_USERNAME}
       - ANI_TOKEN=${ANI_TOKEN}
       - INTERVAL=3600
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped

@@ -2,9 +2,6 @@ services:
   lavalink:
     image: ghcr.io/lavalink-devs/lavalink:4.1.1
     container_name: lavalink
-    ports:
-      - '2333:2333'
-    restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/application.yml:/opt/Lavalink/application.yml
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/plugins/:/opt/Lavalink/plugins/
@@ -12,3 +9,6 @@ services:
       - _JAVA_OPTIONS=-Xmx2G
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
+    ports:
+      - '2333:2333'
+    restart: unless-stopped

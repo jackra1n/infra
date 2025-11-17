@@ -1,9 +1,10 @@
 services:
   qbittorrent:
-    container_name: qbittorrent
     image: ghcr.io/hotio/qbittorrent:release-5.1.3
-    ports:
-      - '8070:8070'
+    container_name: qbittorrent
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/qbittorrent-config:/config
+      - ${DATA_FOLDER}/torrents:/data/torrents
     environment:
       - VPN_ENABLED=true
       - VPN_CONF=wg0-bak
@@ -23,12 +24,11 @@ services:
       - UMASK=002
       - TZ=Europe/Zurich
       - WEBUI_PORTS=8070/tcp,8070/udp
+    ports:
+      - '8070:8070'
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv6.conf.all.disable_ipv6=1
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/qbittorrent-config:/config
-      - ${DATA_FOLDER}/torrents:/data/torrents
-    restart: unless-stopped

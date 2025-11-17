@@ -2,13 +2,13 @@ services:
   prowlarr:
     image: ghcr.io/hotio/prowlarr:release-2.3.0.5236
     container_name: prowlarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
     ports:
       - '9696:9696'
     restart: unless-stopped
@@ -16,15 +16,15 @@ services:
   sonarr:
     image: ghcr.io/hotio/sonarr:release-4.0.16.2944
     container_name: sonarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
-      - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
     ports:
       - '8989:8989'
     restart: unless-stopped
@@ -32,15 +32,15 @@ services:
   radarr:
     image: ghcr.io/hotio/radarr:release-6.0.4.10291
     container_name: radarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
-      - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
     ports:
       - '7878:7878'
     restart: unless-stopped
@@ -48,14 +48,14 @@ services:
   lidarr:
     image: ghcr.io/hotio/lidarr:release-3.0.1.4866
     container_name: lidarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
+      - ${DATA_FOLDER}:/data
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
-      - ${DATA_FOLDER}:/data
     ports:
       - '8686:8686'
     restart: unless-stopped

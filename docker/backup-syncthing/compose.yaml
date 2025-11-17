@@ -2,13 +2,13 @@ services:
   syncthing:
     image: lscr.io/linuxserver/syncthing:2.0.11
     container_name: syncthing
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
+      - ${SYNC_DATA_DIR:?error}:/backups
     environment:
       - PUID=0
       - PGID=0
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
-      - ${SYNC_DATA_DIR:?error}:/backups
     ports:
       - '8384:8384'
       - '22000:22000/tcp'

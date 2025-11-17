@@ -2,28 +2,28 @@ services:
   profilarr:
     image: santiagosayshey/profilarr:v1.1.3
     container_name: profilarr
-    ports:
-      - '6868:6868'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Zurich
+    ports:
+      - '6868:6868'
     restart: unless-stopped
 
   bazarr:
     image: ghcr.io/hotio/bazarr:release-1.5.3
     container_name: bazarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
-      - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
     ports:
       - '6767:6767'
     restart: unless-stopped
@@ -31,13 +31,13 @@ services:
   tautulli:
     image: ghcr.io/hotio/tautulli:release-2.16.0
     container_name: tautulli
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
     ports:
       - '8181:8181'
     restart: unless-stopped
@@ -45,13 +45,13 @@ services:
   qui:
     image: ghcr.io/autobrr/qui:v1.7.0
     container_name: qui
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
     ports:
       - '7476:7476'
     restart: unless-stopped
@@ -59,13 +59,13 @@ services:
   overseerr:
     image: ghcr.io/hotio/overseerr:release-1.34.0
     container_name: overseerr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
     environment:
       - PUID=1000
       - PGID=1000
       - UMASK=002
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
     ports:
       - '5055:5055'
     restart: unless-stopped
@@ -73,17 +73,17 @@ services:
   jellyseerr:
     image: fallenbagel/jellyseerr:2.7.3
     container_name: jellyseerr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/jellyseerr-config:/app/config
     environment:
       - LOG_LEVEL=debug
       - TZ=Europe/Zurich
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/jellyseerr-config:/app/config
     ports:
       - '5056:5055'
+    restart: unless-stopped
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
       start_period: 20s
       timeout: 3s
       interval: 15s
       retries: 3
-    restart: unless-stopped

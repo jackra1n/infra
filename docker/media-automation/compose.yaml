@@ -2,25 +2,25 @@ services:
   cross-seed:
     image: ghcr.io/cross-seed/cross-seed:6.13.6
     container_name: cross-seed
-    user: 1000:1000  # optional but recommended
-    ports:
-      - '2468:2468'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/crossseed-config:/config
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/cross-seed:/data/cross-seed
       - ${QBITTORRENT_CONFIG}/data/BT_backup/:/data/torrent_dir:ro
       - ${DATA_FOLDER}/torrents:/data/torrents
+    ports:
+      - '2468:2468'
     command: daemon
     restart: unless-stopped
+    user: 1000:1000  # optional but recommended
 
   autobrr:
-    container_name: autobrr
     image: ghcr.io/autobrr/autobrr:v1.69.0
-    user: 1000:1000
-    environment:
-      - TZ=Europe/Zurich
+    container_name: autobrr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/autobrr-config:/config
+    environment:
+      - TZ=Europe/Zurich
     ports:
       - '7474:7474'
     restart: unless-stopped
+    user: 1000:1000

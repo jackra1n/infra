@@ -2,9 +2,9 @@ services:
   adguardhome-sync:
     image: ghcr.io/bakito/adguardhome-sync:v0.8.2
     container_name: adguardhome-sync
-    command: run --config /config/adguardhome-sync.yaml
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/adguardhome-sync.yaml:/config/adguardhome-sync.yaml
     ports:
       - '7467:8080'
+    command: run --config /config/adguardhome-sync.yaml
     restart: unless-stopped

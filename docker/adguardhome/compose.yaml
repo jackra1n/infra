@@ -2,7 +2,6 @@ services:
   adguardhome:
     image: adguard/adguardhome:v0.107.69
     container_name: adguardhome
-    restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/opt/adguardhome/work
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/opt/adguardhome/conf
@@ -13,3 +12,4 @@ services:
       - '7443:443/tcp'
       - '7443:443/udp'
       - '3000:3000/tcp'
+    restart: unless-stopped

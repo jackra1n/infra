@@ -2,23 +2,21 @@ services:
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io:0.51.1
     container_name: changedetection
-    hostname: changedetection
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/datastore:/datastore
-    ports:
-      - '5005:5000'
-    restart: unless-stopped
-    environment:
-      - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
     depends_on:
       playwright-chrome:
         condition: service_started
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/datastore:/datastore
+    environment:
+      - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+    ports:
+      - '5005:5000'
+    restart: unless-stopped
+    hostname: changedetection
 
   playwright-chrome:
     image: browserless/chrome:latest
     container_name: change-pw-chrome
-    hostname: playwright-chrome
-    restart: unless-stopped
     environment:
       - SCREEN_WIDTH=1920
       - SCREEN_HEIGHT=1024
@@ -32,3 +30,5 @@ services:
       - DEFAULT_STEALTH=true
       # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
+    restart: unless-stopped
+    hostname: playwright-chrome
