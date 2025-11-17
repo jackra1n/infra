@@ -23,3 +23,7 @@ services:
     ports:
       - '3654:3000'
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 3.5G

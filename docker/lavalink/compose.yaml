@@ -14,3 +14,7 @@ services:
     ports:
       - '2333:2333'
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G

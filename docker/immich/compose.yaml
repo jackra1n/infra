@@ -28,6 +28,10 @@ services:
     extends:
       file: hwaccel.transcoding.yml
       service: quicksync
+    deploy:
+      resources:
+        limits:
+          memory: 3G
 
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:v2.2.3
@@ -39,6 +43,10 @@ services:
     restart: always
     healthcheck:
       disable: false
+    deploy:
+      resources:
+        limits:
+          memory: 4G
 
   redis:
     image: docker.io/valkey/valkey:8-bookworm@sha256:a19bebed6a91bd5e6e2106fef015f9602a3392deeb7c9ed47548378dcee3dfc2
