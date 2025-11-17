@@ -1,6 +1,6 @@
 services:
   free-games-claimer:
-    image: ghcr.io/claabs/epicgames-freegames-node:latest
+    image: ghcr.io/claabs/epicgames-freegames-node:4e4ee5f7aba444a72cf243dd69773f29b026d661
     container_name: epic-free-games
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/:/usr/app/config

@@ -15,7 +15,7 @@ services:
     hostname: changedetection
 
   playwright-chrome:
-    image: browserless/chrome:latest
+    image: browserless/chrome:latest@sha256:3678a24595187a3916dc45b800c4fe962832b581227bbef193ae6f0ec5fbc14d
     container_name: change-pw-chrome
     environment:
       - SCREEN_WIDTH=1920
