@@ -25,13 +25,13 @@ services:
     restart: always
     healthcheck:
       disable: false
-    extends:
-      file: hwaccel.transcoding.yml
-      service: quicksync
     deploy:
       resources:
         limits:
           memory: 3G
+    extends:
+      file: hwaccel.transcoding.yml
+      service: quicksync
 
   immich-machine-learning:
     image: ghcr.io/immich-app/immich-machine-learning:v2.2.3

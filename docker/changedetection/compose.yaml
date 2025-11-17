@@ -33,8 +33,8 @@ services:
       # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
     restart: unless-stopped
-    hostname: playwright-chrome
     deploy:
       resources:
         limits:
           memory: 2G
+    hostname: playwright-chrome
