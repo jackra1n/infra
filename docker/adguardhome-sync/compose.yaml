@@ -6,5 +6,5 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/adguardhome-sync.yaml:/config/adguardhome-sync.yaml
     ports:
-      - 7467:8080
+      - '7467:8080'
     restart: unless-stopped

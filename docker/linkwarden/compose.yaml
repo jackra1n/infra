@@ -15,7 +15,7 @@ services:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       - NEXT_PUBLIC_DISABLE_REGISTRATION=true
     ports:
-      - 3654:3000
+      - '3654:3000'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data/data
     restart: unless-stopped

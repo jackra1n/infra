@@ -3,7 +3,7 @@ services:
     image: ghcr.io/lavalink-devs/lavalink:4.1.1
     container_name: lavalink
     ports:
-      - 2333:2333
+      - '2333:2333'
     restart: unless-stopped
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/application.yml:/opt/Lavalink/application.yml

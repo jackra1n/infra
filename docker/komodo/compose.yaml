@@ -20,7 +20,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - 9120:9120
+      - '9120:9120'
     env_file: ./.env
     environment:
       KOMODO_DATABASE_ADDRESS: mongo:27017

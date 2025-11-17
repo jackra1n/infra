@@ -3,7 +3,7 @@ services:
     container_name: czkawka
     image: ghcr.io/jlesage/czkawka:v25.08.1
     ports:
-      - 5800:5800
+      - '5800:5800'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
       - ${FILES_DIR}:/storage

@@ -4,7 +4,7 @@ services:
     container_name: beszel
     restart: unless-stopped
     ports:
-      - 8090:8090
+      - '8090:8090'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_data:/beszel_data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket

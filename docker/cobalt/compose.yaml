@@ -5,7 +5,7 @@ services:
     init: true
     read_only: true
     ports:
-      - 9000:9000/tcp
+      - '9000:9000/tcp'
     restart: unless-stopped
     environment:
       API_URL: ${API_URL}

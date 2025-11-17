@@ -3,7 +3,7 @@ services:
     image: santiagosayshey/profilarr:v1.1.3
     container_name: profilarr
     ports:
-      - 6868:6868
+      - '6868:6868'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
     environment:
@@ -25,7 +25,7 @@ services:
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
-      - 6767:6767
+      - '6767:6767'
     restart: unless-stopped
 
   tautulli:
@@ -39,7 +39,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
     ports:
-      - 8181:8181
+      - '8181:8181'
     restart: unless-stopped
 
   qui:
@@ -53,7 +53,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
     ports:
-      - 7476:7476
+      - '7476:7476'
     restart: unless-stopped
 
   overseerr:
@@ -67,7 +67,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
     ports:
-      - 5055:5055
+      - '5055:5055'
     restart: unless-stopped
 
   jellyseerr:
@@ -79,7 +79,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/jellyseerr-config:/app/config
     ports:
-      - 5056:5055
+      - '5056:5055'
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
       start_period: 20s

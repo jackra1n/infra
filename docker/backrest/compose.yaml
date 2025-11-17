@@ -5,7 +5,7 @@ services:
     hostname: backrest
     restart: unless-stopped
     ports:
-      - 9898:9898
+      - '9898:9898'
     environment:
       - BACKREST_DATA=/data
       - BACKREST_CONFIG=/config/config.json

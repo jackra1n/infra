@@ -3,7 +3,7 @@ services:
     container_name: epic-free-games
     image: ghcr.io/claabs/epicgames-freegames-node:latest
     ports:
-      - 3887:3000
+      - '3887:3000'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/:/usr/app/config
     environment:

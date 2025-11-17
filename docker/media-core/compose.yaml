@@ -10,7 +10,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
     ports:
-      - 9696:9696
+      - '9696:9696'
     restart: unless-stopped
 
   sonarr:
@@ -26,7 +26,7 @@ services:
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
-      - 8989:8989
+      - '8989:8989'
     restart: unless-stopped
 
   radarr:
@@ -42,7 +42,7 @@ services:
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     ports:
-      - 7878:7878
+      - '7878:7878'
     restart: unless-stopped
 
   lidarr:
@@ -57,7 +57,7 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
       - ${DATA_FOLDER}:/data
     ports:
-      - 8686:8686
+      - '8686:8686'
     restart: unless-stopped
 
   flaresolverr:
@@ -69,5 +69,5 @@ services:
       - CAPTCHA_SOLVER=none
       - TZ=Europe/Zurich
     ports:
-      - 8191:8191
+      - '8191:8191'
     restart: unless-stopped

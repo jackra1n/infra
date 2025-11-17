@@ -25,7 +25,7 @@ services:
       - db
       - broker
     ports:
-      - 8000:8000
+      - '8000:8000'
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/data:/usr/src/paperless/data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/media:/usr/src/paperless/media
