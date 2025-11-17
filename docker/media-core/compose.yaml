@@ -1,6 +1,6 @@
 services:
   prowlarr:
-    image: ghcr.io/hotio/prowlarr:release-2.1.5.5216
+    image: ghcr.io/hotio/prowlarr:release-2.3.0.5236
     container_name: prowlarr
     environment:
       - PUID=1000
