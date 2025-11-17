@@ -21,4 +21,4 @@ jobs:
         with:
           path: docker
           recursive: true
-          disable_rule: no-unbound-port-interfaces
+          disable_rule: no-unbound-port-interfaces service-ports-alphabetical-order

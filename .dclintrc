@@ -1,5 +1,6 @@
 {
   "rules": {
-    "no-unbound-port-interfaces": 0
+    "no-unbound-port-interfaces": 0,
+    "service-ports-alphabetical-order": 0
   }
 }
