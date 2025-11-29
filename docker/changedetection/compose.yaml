@@ -2,7 +2,7 @@ name: changedetection
 
 services:
   changedetection:
-    image: ghcr.io/dgtlmoon/changedetection.io:0.51.3
+    image: ghcr.io/dgtlmoon/changedetection.io:0.51.4
     container_name: changedetection
     depends_on:
       playwright-chrome:
