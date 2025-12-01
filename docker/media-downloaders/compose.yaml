@@ -9,7 +9,7 @@ services:
       - ${DATA_FOLDER}/torrents:/data/torrents
     environment:
       - VPN_ENABLED=true
-      - VPN_CONF=wg0-bak
+      - VPN_CONF=wg0
       - VPN_PROVIDER=proton
       - VPN_LAN_NETWORK=${VPN_LAN_NETWORK}
       - VPN_LAN_LEAK_ENABLED=false
