@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
 
   qui:
-    image: ghcr.io/autobrr/qui:v1.8.0
+    image: ghcr.io/autobrr/qui:v1.8.1
     container_name: qui
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
