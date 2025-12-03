@@ -2,7 +2,7 @@ name: czkawka
 
 services:
   czkawka:
-    image: ghcr.io/jlesage/czkawka:v25.08.1
+    image: ghcr.io/jlesage/czkawka:v25.12.2
     container_name: czkawka
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
