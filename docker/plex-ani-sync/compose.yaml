@@ -13,4 +13,5 @@ services:
       - ANI_USERNAME=${ANI_USERNAME}
       - ANI_TOKEN=${ANI_TOKEN}
       - INTERVAL=3600
+      - TZ=Europe/Berlin
     restart: unless-stopped

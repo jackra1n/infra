@@ -11,8 +11,9 @@ services:
       - _JAVA_OPTIONS=-Xmx2G
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
+      - TZ=Europe/Berlin
     ports:
-      - '2333:2333'
+      - "2333:2333"
     restart: unless-stopped
     deploy:
       resources:

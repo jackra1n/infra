@@ -10,10 +10,10 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '8384:8384'
-      - '22000:22000/tcp'
-      - '22000:22000/udp'
-      - '21027:21027/udp'
+      - "8384:8384"
+      - "22000:22000/tcp"
+      - "22000:22000/udp"
+      - "21027:21027/udp"
     restart: unless-stopped

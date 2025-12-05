@@ -5,7 +5,8 @@ services:
     image: cloudflare/cloudflared:2025.11.1
     container_name: cloudflared-tunnel
     environment:
-      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+      - TZ=Europe/Berlin
     network_mode: host
     command: tunnel run
     restart: unless-stopped

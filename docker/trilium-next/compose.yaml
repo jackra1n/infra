@@ -8,6 +8,8 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/home/node/trilium-data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Europe/Berlin
     ports:
-      - '3390:8080'
+      - "3390:8080"
     restart: unless-stopped

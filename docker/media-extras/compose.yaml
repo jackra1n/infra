@@ -9,9 +9,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '6868:6868'
+      - "6868:6868"
     restart: unless-stopped
 
   bazarr:
@@ -25,9 +25,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '6767:6767'
+      - "6767:6767"
     restart: unless-stopped
 
   tautulli:
@@ -39,9 +39,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '8181:8181'
+      - "8181:8181"
     restart: unless-stopped
 
   qui:
@@ -53,9 +53,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '7476:7476'
+      - "7476:7476"
     restart: unless-stopped
 
   overseerr:
@@ -67,9 +67,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '5055:5055'
+      - "5055:5055"
     restart: unless-stopped
 
   jellyseerr:
@@ -79,9 +79,9 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/jellyseerr-config:/app/config
     environment:
       - LOG_LEVEL=debug
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '5056:5055'
+      - "5056:5055"
     restart: unless-stopped
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1

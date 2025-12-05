@@ -7,8 +7,10 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_data:/beszel_data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket
+    environment:
+      - TZ=Europe/Berlin
     ports:
-      - '8090:8090'
+      - "8090:8090"
     restart: unless-stopped
 
   beszel-agent:
@@ -19,9 +21,10 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_socket:/beszel_socket
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      LISTEN: /beszel_socket/beszel.sock
-      HUB_URL: http://localhost:8090
-      TOKEN: ${BESZEL_AGENT_TOKEN:?error}
-      KEY: ${BESZEL_AGENT_KEY:?error}
+      - LISTEN=/beszel_socket/beszel.sock
+      - HUB_URL=http://localhost:8090
+      - TOKEN=${BESZEL_AGENT_TOKEN:?error}
+      - KEY=${BESZEL_AGENT_KEY:?error}
+      - TZ=Europe/Berlin
     network_mode: host
     restart: unless-stopped

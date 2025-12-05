@@ -24,10 +24,10 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
       - WEBUI_PORTS=8070/tcp,8070/udp
     ports:
-      - '8070:8070'
+      - "8070:8070"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN

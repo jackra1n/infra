@@ -11,6 +11,7 @@ services:
     environment:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM} # optional
+      - TZ=Europe/Berlin
     network_mode: host
     restart: unless-stopped
     devices:

@@ -11,6 +11,7 @@ services:
       - USER_ID=1000
       - GROUP_ID=100
       - DARK_MODE=1
+      - TZ=Europe/Berlin
     ports:
-      - '5800:5800'
+      - "5800:5800"
     cpus: 8.0

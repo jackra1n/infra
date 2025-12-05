@@ -6,11 +6,12 @@ services:
     container_name: homepage
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/app/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro  # (optional) For docker integrations
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
       # if you want homepage to show disk space usage
       - ${DATA_FOLDER}:/disk1:ro
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS}
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
+      - TZ=Europe/Berlin
     ports:
-      - '3210:3000'
+      - "3210:3000"
     restart: unless-stopped

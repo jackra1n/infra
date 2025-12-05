@@ -6,6 +6,8 @@ services:
     container_name: paperless_redis
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/redisdata:/data
+    environment:
+      - TZ=Europe/Berlin
     restart: unless-stopped
 
   db:
@@ -14,9 +16,10 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: paperless
-      POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
+      - POSTGRES_DB=paperless
+      - POSTGRES_USER=paperless
+      - POSTGRES_PASSWORD=paperless
+      - TZ=Europe/Berlin
     restart: unless-stopped
 
   webserver:
@@ -31,9 +34,10 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/export:/usr/src/paperless/export
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/consume:/usr/src/paperless/consume
     environment:
-      PAPERLESS_REDIS: redis://broker:6379
-      PAPERLESS_DBHOST: db
+      - PAPERLESS_REDIS=redis://broker:6379
+      - PAPERLESS_DBHOST=db
+      - TZ=Europe/Berlin
     env_file: .env
     ports:
-      - '8000:8000'
+      - "8000:8000"
     restart: unless-stopped

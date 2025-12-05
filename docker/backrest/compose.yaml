@@ -17,8 +17,8 @@ services:
       - BACKREST_CONFIG=/config/config.json
       - XDG_CACHE_HOME=/cache
       - TMPDIR=/tmp
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '9898:9898'
+      - "9898:9898"
     restart: unless-stopped
     hostname: backrest

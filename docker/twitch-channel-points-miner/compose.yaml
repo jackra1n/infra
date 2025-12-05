@@ -11,8 +11,9 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/run.py:/usr/src/app/run.py:ro
     environment:
       - TERM=xterm-256color
+      - TZ=Europe/Berlin
     ports:
-      - '5000:5000'
+      - "5000:5000"
     restart: unless-stopped
     dns:
       - 1.1.1.1

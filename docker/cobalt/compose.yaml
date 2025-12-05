@@ -5,9 +5,10 @@ services:
     image: ghcr.io/imputnet/cobalt:11.4.3
     container_name: cobalt-api
     environment:
-      API_URL: ${API_URL}
+      - API_URL=${API_URL}
+      - TZ=Europe/Berlin
     ports:
-      - '9000:9000/tcp'
+      - "9000:9000/tcp"
     restart: unless-stopped
     init: true
     read_only: true

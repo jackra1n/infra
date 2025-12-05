@@ -11,8 +11,9 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/datastore:/datastore
     environment:
       - PLAYWRIGHT_DRIVER_URL=ws://playwright-chrome:3000/?stealth=1&--disable-web-security=true
+      - TZ=Europe/Berlin
     ports:
-      - '5005:5000'
+      - "5005:5000"
     restart: unless-stopped
     hostname: changedetection
 
@@ -32,6 +33,7 @@ services:
       - DEFAULT_STEALTH=true
       # Ignore HTTPS errors, like for self-signed certs
       - DEFAULT_IGNORE_HTTPS_ERRORS=true
+      - TZ=Europe/Berlin
     restart: unless-stopped
     deploy:
       resources:

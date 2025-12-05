@@ -7,6 +7,8 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Berlin
     ports:
-      - '3001:3001'
+      - "3001:3001"
     restart: unless-stopped

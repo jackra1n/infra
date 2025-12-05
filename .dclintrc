@@ -2,6 +2,12 @@
   "rules": {
     "no-unbound-port-interfaces": 0,
     "service-ports-alphabetical-order": 0,
-    "services-alphabetical-order": 0
+    "services-alphabetical-order": 0,
+    "require-quotes-in-ports": [
+      1,
+      {
+        "quoteType": "double"
+      }
+    ]
   }
 }

@@ -9,11 +9,13 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/cross-seed:/data/cross-seed
       - ${QBITTORRENT_CONFIG}/data/BT_backup/:/data/torrent_dir:ro
       - ${DATA_FOLDER}/torrents:/data/torrents
+    environment:
+      - TZ=Europe/Berlin
     ports:
-      - '2468:2468'
+      - "2468:2468"
     command: daemon
     restart: unless-stopped
-    user: 1000:1000  # optional but recommended
+    user: 1000:1000 # optional but recommended
 
   autobrr:
     image: ghcr.io/autobrr/autobrr:v1.70.0
@@ -21,8 +23,8 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/autobrr-config:/config
     environment:
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '7474:7474'
+      - "7474:7474"
     restart: unless-stopped
     user: 1000:1000

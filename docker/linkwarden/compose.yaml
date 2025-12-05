@@ -6,6 +6,8 @@ services:
     container_name: postgres-linkwarden
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data
+    environment:
+      - TZ=Europe/Berlin
     env_file: .env
     restart: unless-stopped
 
@@ -19,9 +21,10 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       - NEXT_PUBLIC_DISABLE_REGISTRATION=true
+      - TZ=Europe/Berlin
     env_file: .env
     ports:
-      - '3654:3000'
+      - "3654:3000"
     restart: unless-stopped
     deploy:
       resources:

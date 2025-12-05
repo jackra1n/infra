@@ -14,21 +14,22 @@ services:
       ## Custom location for docker compose repo
       - ${PERIPHERY_ADDITIONAL_DIRECTORY}:${PERIPHERY_ADDITIONAL_DIRECTORY}
     environment:
-      PERIPHERY_ROOT_DIRECTORY: ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
+      - PERIPHERY_ROOT_DIRECTORY=${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       ## Pass the same passkey as used by the Komodo Core connecting to this Periphery agent.
-      PERIPHERY_PASSKEYS: ${PERIPHERY_PASSKEYS:-komodo-passkey}
+      - PERIPHERY_PASSKEYS=${PERIPHERY_PASSKEYS:-komodo-passkey}
+      - TZ=Europe/Berlin
       ## Make server run over https
-      PERIPHERY_SSL_ENABLED: true
+      - PERIPHERY_SSL_ENABLED=true
       ## Specify whether to disable the terminals feature
       ## and disallow remote shell access (inside the Periphery container).
-      PERIPHERY_DISABLE_TERMINALS: false
+      - PERIPHERY_DISABLE_TERMINALS=false
       ## If the disk size is overreporting, can use one of these to
       ## whitelist / blacklist the disks to filter them, whichever is easier.
       ## Accepts comma separated list of paths.
       ## Usually whitelisting just /etc/hostname gives correct size for single root disk.
-      PERIPHERY_INCLUDE_DISK_MOUNTS: /etc/hostname
-      DOCKER_DATA_DIR: ${DOCKER_DATA_DIR:-/opt/infra-data}
+      - PERIPHERY_INCLUDE_DISK_MOUNTS=/etc/hostname
+      - DOCKER_DATA_DIR=${DOCKER_DATA_DIR:-/opt/infra-data}
     network_mode: host
     restart: unless-stopped
     labels:
-      komodo.skip:  # Prevent Komodo from stopping with StopAllContainers
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers

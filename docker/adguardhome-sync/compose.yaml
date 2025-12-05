@@ -6,7 +6,9 @@ services:
     container_name: adguardhome-sync
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/adguardhome-sync.yaml:/config/adguardhome-sync.yaml
+    environment:
+      - TZ=Europe/Berlin
     ports:
-      - '7467:8080'
+      - "7467:8080"
     command: run --config /config/adguardhome-sync.yaml
     restart: unless-stopped

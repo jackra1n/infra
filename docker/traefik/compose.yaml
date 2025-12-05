@@ -11,12 +11,12 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/etc/traefik
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/var/log/traefik/
     environment:
-      - TZ=Europe/Zurich
-      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}  # Cloudflare account email
-      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}  # Cloudflare API key
+      - TZ=Europe/Berlin
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL} # Cloudflare account email
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY} # Cloudflare API key
     ports:
-      - '80:80'
-      - '443:443'
+      - "80:80"
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
-      - '8080:8080'
+      - "8080:8080"
     restart: unless-stopped

@@ -10,9 +10,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '9696:9696'
+      - "9696:9696"
     restart: unless-stopped
 
   sonarr:
@@ -26,9 +26,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '8989:8989'
+      - "8989:8989"
     restart: unless-stopped
 
   radarr:
@@ -42,9 +42,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '7878:7878'
+      - "7878:7878"
     restart: unless-stopped
 
   lidarr:
@@ -57,9 +57,9 @@ services:
       - PUID=1000
       - PGID=1000
       - UMASK=002
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '8686:8686'
+      - "8686:8686"
     restart: unless-stopped
 
   flaresolverr:
@@ -69,9 +69,9 @@ services:
       - LOG_LEVEL=info
       - LOG_HTML=false
       - CAPTCHA_SOLVER=none
-      - TZ=Europe/Zurich
+      - TZ=Europe/Berlin
     ports:
-      - '8191:8191'
+      - "8191:8191"
     restart: unless-stopped
     deploy:
       resources:
