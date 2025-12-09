@@ -2,7 +2,7 @@ name: adguardhome
 
 services:
   adguardhome:
-    image: adguard/adguardhome:v0.107.70
+    image: adguard/adguardhome:v0.107.71
     container_name: adguardhome
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/opt/adguardhome/work
