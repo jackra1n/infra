@@ -2,7 +2,7 @@ name: komodo
 
 services:
   mongo:
-    image: mongo:8.0.16
+    image: mongo:8.0.17
     container_name: komodo-mongo
     volumes:
       - ./mongo/db:/data/db
