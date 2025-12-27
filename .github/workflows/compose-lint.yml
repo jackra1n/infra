@@ -1,12 +1,13 @@
 name: Lint Docker Compose
 
 on:
+  workflow_call:
   push:
     paths:
-      - 'docker/**/compose.yaml'
+      - "docker/**/compose.yaml"
   pull_request:
     paths:
-      - 'docker/**/compose.yaml'
+      - "docker/**/compose.yaml"
 
   workflow_dispatch:
 

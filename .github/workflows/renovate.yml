@@ -1,15 +1,16 @@
 name: Renovate
 
 on:
+  workflow_call:
   schedule:
-    - cron: '0 11 * * *' # every day at 11:00 PM UTC (12 PM CET)
+    - cron: "0 11 * * *" # every day at 11:00 PM UTC (12 PM CET)
 
   workflow_dispatch: # allow manual trigger
-            
+
 jobs:
   renovate:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5.0.0
