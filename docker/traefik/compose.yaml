@@ -2,7 +2,7 @@ name: traefik
 
 services:
   reverse-proxy:
-    image: traefik:v3.6.5
+    image: traefik:v3.6.6
     container_name: traefik
     volumes:
       - /etc/localtime:/etc/localtime:ro
