@@ -49,6 +49,7 @@ services:
     container_name: qui
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
+      - ${DATA_FOLDER}/torrents:/data/torrents
     environment:
       - PUID=1000
       - PGID=1000
