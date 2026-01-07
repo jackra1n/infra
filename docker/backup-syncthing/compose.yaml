@@ -2,7 +2,7 @@ name: backup-syncthing
 
 services:
   syncthing:
-    image: lscr.io/linuxserver/syncthing:2.0.12
+    image: lscr.io/linuxserver/syncthing:2.0.13
     container_name: syncthing
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
