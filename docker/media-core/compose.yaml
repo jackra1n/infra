@@ -47,21 +47,6 @@ services:
       - "7878:7878"
     restart: unless-stopped
 
-  lidarr:
-    image: ghcr.io/hotio/lidarr:release-3.1.0.4875
-    container_name: lidarr
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/lidarr-config:/config
-      - ${DATA_FOLDER}:/data
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Berlin
-    ports:
-      - "8686:8686"
-    restart: unless-stopped
-
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     container_name: flaresolverr
