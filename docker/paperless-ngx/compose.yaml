@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
 
   webserver:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.4
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.20.5
     container_name: paperless
     depends_on:
       - broker
