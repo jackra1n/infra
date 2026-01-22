@@ -23,7 +23,7 @@ jobs:
           private-key: ${{ secrets.RENOVATE_APP_PRIVATE_KEY }}
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v44.2.1
+        uses: renovatebot/github-action@v44.2.5
         env:
           RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
