@@ -2,7 +2,7 @@ name: cloudflare-tunnel
 
 services:
   tunnel:
-    image: cloudflare/cloudflared:2025.11.1
+    image: cloudflare/cloudflared:2026.1.1
     container_name: cloudflared-tunnel
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
