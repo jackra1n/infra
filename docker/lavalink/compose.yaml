@@ -8,7 +8,7 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/application.yml:/opt/Lavalink/application.yml
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/plugins/:/opt/Lavalink/plugins/
     environment:
-      - _JAVA_OPTIONS=-Xmx1G -XX:+UseZGC -XX:+ZGenerational
+      - _JAVA_OPTIONS=-Xmx1G -XX:+UseZGC
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
       - TZ=Europe/Berlin
