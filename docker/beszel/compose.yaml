@@ -26,5 +26,6 @@ services:
       - TOKEN=${BESZEL_AGENT_TOKEN:?error}
       - KEY=${BESZEL_AGENT_KEY:?error}
       - TZ=Europe/Berlin
+      - SENSORS
     network_mode: host
     restart: unless-stopped
