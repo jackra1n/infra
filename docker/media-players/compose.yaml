@@ -2,7 +2,7 @@ name: media-players
 
 services:
   plex:
-    image: lscr.io/linuxserver/plex:1.42.2
+    image: lscr.io/linuxserver/plex:1.43.0
     container_name: plex
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/plex-config:/config
