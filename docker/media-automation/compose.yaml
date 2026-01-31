@@ -18,7 +18,7 @@ services:
     user: 1000:1000 # optional but recommended
 
   autobrr:
-    image: ghcr.io/autobrr/autobrr:v1.72.0
+    image: ghcr.io/autobrr/autobrr:v1.72.1
     container_name: autobrr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/autobrr-config:/config
