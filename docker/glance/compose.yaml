@@ -1,0 +1,16 @@
+name: glance
+
+services:
+  glance:
+    image: glanceapp/glance:v0.8.4
+    container_name: glance
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/app/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/assets:/app/assets
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - "8570:8080"
+    restart: unless-stopped
