@@ -7,6 +7,8 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/app/logs
+    environment:
+      - TZ=Europe/Berlin
     ports:
       - "1738:3000"
     restart: unless-stopped
