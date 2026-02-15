@@ -60,14 +60,11 @@ services:
     restart: unless-stopped
 
   seerr:
-    image: ghcr.io/hotio/seerr:release-3.0.1
+    image: ghcr.io/seerr-team/seerr:v3.0.1
     container_name: seerr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/seerr-config:/app/config
     environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
       - TZ=Europe/Berlin
     ports:
       - "5054:8182"
