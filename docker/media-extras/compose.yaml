@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   tautulli:
-    image: ghcr.io/hotio/tautulli:release-2.16.0
+    image: ghcr.io/hotio/tautulli:release-2.16.1
     container_name: tautulli
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
