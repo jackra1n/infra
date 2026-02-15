@@ -69,17 +69,3 @@ services:
     ports:
       - "5054:5055"
     restart: unless-stopped
-
-  overseerr:
-    image: ghcr.io/hotio/overseerr:release-1.34.0
-    container_name: overseerr
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/overseerr-config:/app/config
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Berlin
-    ports:
-      - "5055:5055"
-    restart: unless-stopped
