@@ -48,7 +48,7 @@ services:
     image: ghcr.io/autobrr/qui:v1.13.1
     container_name: qui
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/qui-config:/config
       - ${DATA_FOLDER}/torrents:/data/torrents
     environment:
       - PUID=1000
