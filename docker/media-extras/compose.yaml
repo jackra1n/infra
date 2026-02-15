@@ -59,6 +59,20 @@ services:
       - "7476:7476"
     restart: unless-stopped
 
+  seerr:
+    image: ghcr.io/hotio/seerr:release-3.0.1
+    container_name: seerr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/seerr-config:/app/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Berlin
+    ports:
+      - "5054:8182"
+    restart: unless-stopped
+
   overseerr:
     image: ghcr.io/hotio/overseerr:release-1.34.0
     container_name: overseerr
