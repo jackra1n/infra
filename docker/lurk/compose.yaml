@@ -2,7 +2,7 @@ name: lurk
 
 services:
   lurk:
-    image: ghcr.io/jackra1n/lurk:1.0.3
+    image: ghcr.io/jackra1n/lurk:1.1.0
     container_name: lurk
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
