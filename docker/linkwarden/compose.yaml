@@ -2,8 +2,8 @@ name: linkwarden
 
 services:
   postgres:
-    image: postgres:16-alpine
-    container_name: postgres-linkwarden
+    image: postgres:16
+    container_name: linkwarden-postgres
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data
     environment:
