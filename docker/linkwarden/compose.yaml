@@ -2,7 +2,7 @@ name: linkwarden
 
 services:
   postgres:
-    image: postgres:16
+    image: postgres:18
     container_name: linkwarden-postgres
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data

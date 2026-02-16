@@ -5,16 +5,16 @@ services:
     image: docker.io/library/redis:8
     container_name: paperless_redis
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/redisdata:/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/redisdata:/data
     environment:
       - TZ=Europe/Berlin
     restart: unless-stopped
 
   db:
-    image: postgres:16
+    image: postgres:18
     container_name: paperless_postgres
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data/pgdata:/var/lib/postgresql/data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=paperless
       - POSTGRES_USER=paperless
