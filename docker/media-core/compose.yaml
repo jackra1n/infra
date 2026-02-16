@@ -13,6 +13,9 @@ services:
       - TZ=Europe/Berlin
     ports:
       - "9696:9696"
+    dns:
+      - 9.9.9.9
+      - 1.1.1.1
     restart: unless-stopped
 
   sonarr:
