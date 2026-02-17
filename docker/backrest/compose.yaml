@@ -2,7 +2,7 @@ name: backrest
 
 services:
   backrest:
-    image: garethgeorge/backrest:v1.9.2
+    image: garethgeorge/backrest:v1.11.2
     container_name: backrest
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
