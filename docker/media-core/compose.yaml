@@ -13,10 +13,10 @@ services:
       - TZ=Europe/Berlin
     ports:
       - "9696:9696"
+    restart: unless-stopped
     dns:
       - 9.9.9.9
       - 1.1.1.1
-    restart: unless-stopped
 
   sonarr:
     image: ghcr.io/hotio/sonarr:release-4.0.16.2944
