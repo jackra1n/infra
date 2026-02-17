@@ -14,36 +14,6 @@ services:
       - "6868:6868"
     restart: unless-stopped
 
-  bazarr:
-    image: ghcr.io/hotio/bazarr:release-1.5.5
-    container_name: bazarr
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
-      - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Berlin
-    ports:
-      - "6767:6767"
-    restart: unless-stopped
-
-  tautulli:
-    image: ghcr.io/hotio/tautulli:release-2.16.1
-    container_name: tautulli
-    volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - UMASK=002
-      - TZ=Europe/Berlin
-    ports:
-      - "8181:8181"
-    restart: unless-stopped
-
   qui:
     image: ghcr.io/autobrr/qui:v1.13.1
     container_name: qui
@@ -68,4 +38,34 @@ services:
       - TZ=Europe/Berlin
     ports:
       - "5054:5055"
+    restart: unless-stopped
+
+  tautulli:
+    image: ghcr.io/hotio/tautulli:release-2.16.1
+    container_name: tautulli
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Berlin
+    ports:
+      - "8181:8181"
+    restart: unless-stopped
+
+  bazarr:
+    image: ghcr.io/hotio/bazarr:release-1.5.5
+    container_name: bazarr
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
+      - ${DATA_FOLDER}:/data
+      - ${ADDITIONAL_SHARE}:/data2
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Berlin
+    ports:
+      - "6767:6767"
     restart: unless-stopped
