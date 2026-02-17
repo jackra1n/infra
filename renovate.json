@@ -22,6 +22,16 @@
       "enabled": false
     },
     {
+      "description": "Keep MongoDB on LTS release lines only; block rapid releases",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "mongo"
+      ],
+      "allowedVersions": "/^\\d+\\.0(?:\\.\\d+)?$/"
+    },
+    {
       "description": "Group Immich updates together",
       "matchPackageNames": [
         "ghcr.io/immich-app/immich-server",
