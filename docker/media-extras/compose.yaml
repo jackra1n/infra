@@ -28,6 +28,9 @@ services:
     ports:
       - "7476:7476"
     restart: unless-stopped
+    dns:
+      - 9.9.9.9
+      - 1.1.1.1
 
   seerr:
     image: ghcr.io/seerr-team/seerr:v3.0.1
