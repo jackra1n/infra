@@ -5,8 +5,8 @@ services:
     image: mongo:8.0.19
     container_name: komodo-mongo
     volumes:
-      - ./mongo/db:/data/db
-      - ./mongo/config:/data/configdb
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/mongo/db:/data/db
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/mongo/config:/data/configdb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${KOMODO_DB_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${KOMODO_DB_PASSWORD}
@@ -22,7 +22,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - ./core/repos:/repo-cache
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/backups:/backups
     environment:
       - KOMODO_DATABASE_ADDRESS=mongo:27017
       - KOMODO_DATABASE_USERNAME=${KOMODO_DB_USERNAME}
