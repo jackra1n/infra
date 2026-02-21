@@ -2,7 +2,7 @@ name: beszel
 
 services:
   beszel:
-    image: henrygd/beszel:0.18.3
+    image: henrygd/beszel:0.18.4
     container_name: beszel
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_data:/beszel_data
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   beszel-agent:
-    image: henrygd/beszel-agent:0.18.3
+    image: henrygd/beszel-agent:0.18.4
     container_name: beszel-agent
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/beszel_agent_data:/var/lib/beszel-agent
