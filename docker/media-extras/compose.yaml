@@ -5,7 +5,7 @@ services:
     image: santiagosayshey/profilarr:beta
     container_name: profilarr
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/profilarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/profilarr/config:/config
     environment:
       - PUID=1000
       - PGID=1000
@@ -18,7 +18,7 @@ services:
     image: ghcr.io/autobrr/qui:v1.14.0
     container_name: qui
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/qui-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/qui/config:/config
       - ${DATA_FOLDER}/torrents:/data/torrents
     environment:
       - PUID=1000
@@ -36,7 +36,7 @@ services:
     image: ghcr.io/seerr-team/seerr:v3.0.1
     container_name: seerr
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/seerr-config:/app/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/seerr/config:/app/config
     environment:
       - TZ=Europe/Berlin
     ports:
@@ -48,7 +48,7 @@ services:
     image: ghcr.io/hotio/tautulli:release-2.16.1
     container_name: tautulli
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/tautulli-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/tautulli/config:/config
     environment:
       - PUID=1000
       - PGID=1000
@@ -62,7 +62,7 @@ services:
     image: ghcr.io/hotio/bazarr:release-1.5.5
     container_name: bazarr
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/bazarr-config:/config
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/bazarr/config:/config
       - ${DATA_FOLDER}:/data
       - ${ADDITIONAL_SHARE}:/data2
     environment:
