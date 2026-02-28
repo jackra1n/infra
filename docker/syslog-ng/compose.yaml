@@ -1,0 +1,11 @@
+services:
+  syslog-ng:
+    image: balabit/syslog-ng:4.11.0
+    container_name: syslog-ng
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/logs:/var/log/remote
+    ports:
+      - "514:514/udp"
+      - "514:514/tcp"
+    restart: unless-stopped
