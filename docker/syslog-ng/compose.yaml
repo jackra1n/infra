@@ -1,3 +1,5 @@
+name: syslog-ng
+
 services:
   syslog-ng:
     image: balabit/syslog-ng:4.11.0
