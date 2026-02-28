@@ -2,7 +2,7 @@ name: adguardhome-sync
 
 services:
   adguardhome-sync:
-    image: ghcr.io/bakito/adguardhome-sync:v0.8.2
+    image: ghcr.io/bakito/adguardhome-sync:v0.9.0
     container_name: adguardhome-sync
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/adguardhome-sync.yaml:/config/adguardhome-sync.yaml
