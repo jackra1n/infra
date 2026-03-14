@@ -9,5 +9,5 @@ services:
     network_mode: host
     pid: host
     volumes:
-      - /:/host:ro,rslave
+      - /:/host:ro
     restart: unless-stopped
