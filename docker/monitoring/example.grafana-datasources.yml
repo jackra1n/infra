@@ -1,0 +1,25 @@
+# Copy to: ${DOCKER_DATA_DIR}/${COMPOSE_PROJECT_NAME}/config/grafana/provisioning/datasources/datasources.yml
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    jsonData:
+      httpMethod: POST
+      prometheusType: Prometheus
+      timeInterval: 30s
+    editable: true
+
+  - name: Loki
+    uid: loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    jsonData:
+      maxLines: 1000
+    editable: true

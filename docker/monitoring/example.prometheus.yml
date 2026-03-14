@@ -1,0 +1,22 @@
+# Copy to: ${DOCKER_DATA_DIR}/${COMPOSE_PROJECT_NAME}/config/prometheus/prometheus.yml
+
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+
+  - job_name: loki
+    static_configs:
+      - targets:
+          - loki:3100
+
+  # Future target example:
+  # - job_name: alloy
+  #   static_configs:
+  #     - targets:
+  #         - alloy:12345

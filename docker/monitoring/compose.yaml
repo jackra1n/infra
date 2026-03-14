@@ -1,0 +1,45 @@
+name: monitoring
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.10.0
+    container_name: prometheus
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/prometheus:/prometheus
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prometheus:/etc/prometheus:ro
+    environment:
+      - TZ=Europe/Berlin
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.enable-lifecycle
+    restart: unless-stopped
+
+  loki:
+    image: grafana/loki:3.6.7
+    container_name: loki
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/loki:/loki
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/loki:/etc/loki:ro
+    environment:
+      - TZ=Europe/Berlin
+    command: -config.file=/etc/loki/loki-config.yml
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:12.4.1
+    container_name: grafana
+    depends_on:
+      - loki
+      - prometheus
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/grafana:/var/lib/grafana
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/grafana/provisioning:/etc/grafana/provisioning:ro
+    environment:
+      - TZ=Europe/Berlin
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-change-me}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - "3002:3000"
+    restart: unless-stopped
