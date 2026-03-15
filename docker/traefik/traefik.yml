@@ -3,11 +3,11 @@ global:
   sendAnonymousUsage: false  # true by default
 
 accesslog:
-  format: common  # common, json, logfmt
+  format: common  # common, json
   filePath: /var/log/traefik/access.log
 
 api:
-  dashboard: true  # true by default
+  dashboard: true
 
 entryPoints:
   web:
@@ -19,6 +19,8 @@ entryPoints:
           scheme: https
   websecure:
     address: :443
+  metrics:
+    address: :8082
 
 certificatesResolvers:
   production:
