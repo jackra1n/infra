@@ -2,12 +2,13 @@ name: adguard-exporter
 
 services:
   adguard-exporter:
-    image: ghcr.io/henrywhitaker3/adguard-exporter:v1.2.1
+    image: ghcr.io/znandev/adguardexporter:v1.2.3
     container_name: adguard-exporter
     environment:
-      - ADGUARD_SERVERS=${ADGUARD_SERVERS:?error}
-      - ADGUARD_USERNAMES=${ADGUARD_USERNAMES:?error}
-      - ADGUARD_PASSWORDS=${ADGUARD_PASSWORDS:?error}
+      - ADGUARD_HOST=${ADGUARD_HOST:?error}
+      - ADGUARD_USER=${ADGUARD_USER:?error}
+      - ADGUARD_PASS=${ADGUARD_PASS:?error}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
     ports:
-      - "9618:9618"
+      - "9617:9617"
     restart: unless-stopped
