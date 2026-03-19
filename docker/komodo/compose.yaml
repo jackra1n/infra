@@ -2,7 +2,7 @@ name: komodo
 
 services:
   mongo:
-    image: mongo:8.0.19
+    image: mongo:8.0.20
     container_name: komodo-mongo
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/mongo/db:/data/db
