@@ -1,0 +1,51 @@
+name: romm
+
+services:
+  romm:
+    image: rommapp/romm:4.7.0
+    container_name: romm
+    depends_on:
+      romm-db:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/resources:/romm/resources
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/redis-data:/redis-data
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/romm/config
+      - ${DATA_FOLDER:?error}/games/library:/romm/library
+      - ${DATA_FOLDER:?error}/games/romm/assets:/romm/assets
+    environment:
+      - DB_HOST=romm-db
+      - DB_NAME=${MARIADB_DATABASE}
+      - DB_USER=${MARIADB_USER}
+      - DB_PASSWD=${MARIADB_PASSWORD}
+      - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET}
+      - SCREENSCRAPER_USER=${SCREENSCRAPER_USER}
+      - SCREENSCRAPER_PASSWORD=${SCREENSCRAPER_PASSWORD}
+      - RETROACHIEVEMENTS_API_KEY=${RETROACHIEVEMENTS_API_KEY}
+      - STEAMGRIDDB_API_KEY=${STEAMGRIDDB_API_KEY}
+      - HASHEOUS_API_ENABLED=${HASHEOUS_API_ENABLED}
+      - TZ=Europe/Berlin
+    ports:
+      - "8088:8080"
+    restart: unless-stopped
+
+  romm-db:
+    image: mariadb:12.2.2
+    container_name: romm-db
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/mysql:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - TZ=Europe/Berlin
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 30s
+      start_interval: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
