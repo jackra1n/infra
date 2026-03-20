@@ -19,7 +19,7 @@ services:
       - 1.1.1.1
 
   sonarr:
-    image: ghcr.io/hotio/sonarr:release-4.0.16.2944
+    image: ghcr.io/hotio/sonarr:release-4.0.17.2952
     container_name: sonarr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
