@@ -17,7 +17,7 @@ services:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
 
   core:
-    image: ghcr.io/moghtech/komodo-core:1.19.5
+    image: ghcr.io/moghtech/komodo-core:2.0.0
     container_name: komodo-core
     depends_on:
       - mongo
@@ -36,7 +36,7 @@ services:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
 
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:1.19.5
+    image: ghcr.io/moghtech/komodo-periphery:2.0.0
     container_name: komodo-periphery
     volumes:
       ## Mount external docker socket
