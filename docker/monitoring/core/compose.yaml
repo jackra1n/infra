@@ -29,7 +29,7 @@ services:
     user: "${UID}:${GID}"
 
   grafana:
-    image: grafana/grafana:12.4.1
+    image: grafana/grafana:12.4.2
     container_name: grafana
     depends_on:
       - loki
