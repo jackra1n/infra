@@ -45,7 +45,7 @@ services:
     init: true
 
   tautulli:
-    image: ghcr.io/hotio/tautulli:release-2.16.1
+    image: ghcr.io/hotio/tautulli:release-2.17.0
     container_name: tautulli
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/tautulli/config:/config
