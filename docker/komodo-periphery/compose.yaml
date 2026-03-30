@@ -13,6 +13,7 @@ services:
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       ## Custom location for docker compose repo
       - ${PERIPHERY_ADDITIONAL_DIRECTORY}:${PERIPHERY_ADDITIONAL_DIRECTORY}
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/keys:/config/keys
     environment:
       - PERIPHERY_ROOT_DIRECTORY=${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
       ## Pass the same passkey as used by the Komodo Core connecting to this Periphery agent.
@@ -32,3 +33,4 @@ services:
     restart: unless-stopped
     labels:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    init: true
