@@ -2,7 +2,7 @@ name: romm
 
 services:
   romm:
-    image: rommapp/romm:4.7.0
+    image: rommapp/romm:4.8.0
     container_name: romm
     depends_on:
       romm-db:
