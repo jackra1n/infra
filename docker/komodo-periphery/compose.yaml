@@ -2,7 +2,7 @@ name: komodo-periphery
 
 services:
   periphery:
-    image: ghcr.io/moghtech/komodo-periphery:2.0.0
+    image: ghcr.io/moghtech/komodo-periphery:2.1.0
     container_name: komodo-periphery
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
