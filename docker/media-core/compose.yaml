@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
 
   radarr:
-    image: ghcr.io/hotio/radarr:release-6.0.4.10291
+    image: ghcr.io/hotio/radarr:release-6.1.1.10360
     container_name: radarr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
