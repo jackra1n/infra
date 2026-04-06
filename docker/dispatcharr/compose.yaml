@@ -2,7 +2,7 @@ name: dispatcharr
 
 services:
   dispatcharr:
-    image: ghcr.io/dispatcharr/dispatcharr:0.22.0
+    image: ghcr.io/dispatcharr/dispatcharr:0.22.1
     container_name: dispatcharr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
