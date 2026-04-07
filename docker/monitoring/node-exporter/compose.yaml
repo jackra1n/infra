@@ -2,7 +2,7 @@ name: node-exporter
 
 services:
   node-exporter:
-    image: prom/node-exporter:v1.10.2
+    image: prom/node-exporter:v1.11.0
     container_name: node-exporter
     command:
       - --path.rootfs=/host
