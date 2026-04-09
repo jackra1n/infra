@@ -2,7 +2,7 @@ name: cobalt-api
 
 services:
   cobalt-api:
-    image: ghcr.io/imputnet/cobalt:11.4.3
+    image: ghcr.io/imputnet/cobalt:11.7.1
     container_name: cobalt-api
     environment:
       - API_URL=${API_URL}
