@@ -2,7 +2,7 @@ name: monitoring
 
 services:
   prometheus:
-    image: prom/prometheus:v3.11.0
+    image: prom/prometheus:v3.11.1
     container_name: prometheus
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/prometheus:/prometheus
