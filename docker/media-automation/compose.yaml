@@ -2,7 +2,7 @@ name: media-automation
 
 services:
   cross-seed:
-    image: ghcr.io/cross-seed/cross-seed:6.13.6
+    image: ghcr.io/cross-seed/cross-seed:6.13.7
     container_name: cross-seed
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/crossseed-config:/config
