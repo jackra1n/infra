@@ -7,7 +7,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/plex-config:/config
       - ${DATA_FOLDER}/media:/media
-      - ${ADDITIONAL_SHARE}:/media-synology
+      - ${ADDITIONAL_SHARE}:/media-synology:rslave
     environment:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM} # optional

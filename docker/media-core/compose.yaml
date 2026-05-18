@@ -24,7 +24,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/sonarr-config:/config
       - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
+      - ${ADDITIONAL_SHARE}:/data2:rslave
     environment:
       - PUID=1000
       - PGID=1000
@@ -40,7 +40,7 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/radarr-config:/config
       - ${DATA_FOLDER}:/data
-      - ${ADDITIONAL_SHARE}:/data2
+      - ${ADDITIONAL_SHARE}:/data2:rslave
     environment:
       - PUID=1000
       - PGID=1000
