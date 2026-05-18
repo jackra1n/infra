@@ -2,13 +2,14 @@ name: media-extras
 
 services:
   profilarr:
-    image: santiagosayshey/profilarr:beta
+    image: santiagosayshey/profilarr:2.0.0
     container_name: profilarr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/profilarr/config:/config
     environment:
       - PUID=1000
       - PGID=1000
+      - UMASK=022
       - TZ=Europe/Berlin
     ports:
       - "6868:6868"
