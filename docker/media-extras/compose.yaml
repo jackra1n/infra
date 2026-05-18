@@ -11,6 +11,7 @@ services:
       - PGID=1000
       - UMASK=022
       - TZ=Europe/Berlin
+      - ORIGIN=${ORIGIN_PROFILARR:?error}
     ports:
       - "6868:6868"
     restart: unless-stopped
