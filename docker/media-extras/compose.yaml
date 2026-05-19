@@ -2,7 +2,7 @@ name: media-extras
 
 services:
   profilarr:
-    image: ghcr.io/dictionarry-hub/profilarr:2.0.0
+    image: ghcr.io/dictionarry-hub/profilarr:2.0.1
     container_name: profilarr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/profilarr/config:/config
