@@ -1,17 +1,14 @@
 name: czkawka
 
 services:
-  czkawka:
-    image: ghcr.io/jlesage/czkawka:v26.03.1
-    container_name: czkawka
+  czkawka-web:
+    image: ghcr.io/jackra1n/czkawka-web:1.0.0
+    container_name: czkawka-web
     volumes:
-      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/config
-      - ${FILES_DIR}:/storage
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
+      - ${FILES_DIR}:/mnt/files
     environment:
-      - USER_ID=1000
-      - GROUP_ID=100
-      - DARK_MODE=1
       - TZ=Europe/Berlin
     ports:
-      - "5800:5800"
+      - "5800:3000"
     cpus: 8.0
