@@ -2,7 +2,7 @@ name: glance
 
 services:
   glance:
-    image: glanceapp/glance:v0.8.4
+    image: glanceapp/glance:v0.8.5
     container_name: glance
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config:/app/config
