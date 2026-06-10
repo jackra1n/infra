@@ -2,7 +2,7 @@ name: media-core
 
 services:
   prowlarr:
-    image: ghcr.io/hotio/prowlarr:release-2.3.5.5327
+    image: ghcr.io/hotio/prowlarr:release-2.4.0.5397
     container_name: prowlarr
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/config/prowlarr-config:/config
