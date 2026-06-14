@@ -2,7 +2,7 @@ name: czkawka-web
 
 services:
   czkawka-web:
-    image: ghcr.io/jackra1n/czkawka-web:1.0.0
+    image: ghcr.io/jackra1n/czkawka-web:1.1.0
     container_name: czkawka-web
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/data:/data
@@ -10,5 +10,5 @@ services:
     environment:
       - TZ=Europe/Berlin
     ports:
-      - "5800:3000"
+      - "6198:6198"
     cpus: 8.0
