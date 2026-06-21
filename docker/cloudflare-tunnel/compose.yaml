@@ -2,7 +2,7 @@ name: cloudflare-tunnel
 
 services:
   tunnel:
-    image: cloudflare/cloudflared:2026.6.0
+    image: cloudflare/cloudflared:2026.6.1
     container_name: cloudflared-tunnel
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
