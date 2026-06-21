@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   romm-db:
-    image: mariadb:12.2.2
+    image: mariadb:12.3.2
     container_name: romm-db
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/mysql:/var/lib/mysql
