@@ -2,7 +2,7 @@ name: syslog-ng
 
 services:
   syslog-ng:
-    image: balabit/syslog-ng:4.11.0
+    image: balabit/syslog-ng:4.12.0
     container_name: syslog-ng
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
