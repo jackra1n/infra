@@ -2,7 +2,7 @@ name: plex-ani-sync
 
 services:
   plexanisync:
-    image: ghcr.io/rickdb/plexanisync:1.4.3
+    image: ghcr.io/rickdb/plexanisync:1.4.4
     container_name: plexanisync
     volumes:
       - /etc/localtime:/etc/localtime:ro
