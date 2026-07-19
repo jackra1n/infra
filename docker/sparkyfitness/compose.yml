@@ -1,0 +1,57 @@
+name: sparkyfitness
+
+services:
+  sparkyfitness-db:
+    image: postgres:18.3-alpine
+    container_name: sparkyfitness-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${SPARKY_FITNESS_DB_NAME:?error}
+      POSTGRES_USER: ${SPARKY_FITNESS_DB_USER:?error}
+      POSTGRES_PASSWORD: ${SPARKY_FITNESS_DB_PASSWORD:?error}
+      TZ: ${TZ:-Europe/Berlin}
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  sparkyfitness-server:
+    image: ghcr.io/codewithcj/sparkyfitness-server:v0.17.3
+    container_name: sparkyfitness-server
+    environment:
+      NODE_ENV: production
+      TZ: ${TZ:-Europe/Berlin}
+      SPARKY_FITNESS_LOG_LEVEL: ${SPARKY_FITNESS_LOG_LEVEL:-ERROR}
+      SPARKY_FITNESS_DB_USER: ${SPARKY_FITNESS_DB_USER:?error}
+      SPARKY_FITNESS_DB_HOST: sparkyfitness-db
+      SPARKY_FITNESS_DB_NAME: ${SPARKY_FITNESS_DB_NAME:?error}
+      SPARKY_FITNESS_DB_PASSWORD: ${SPARKY_FITNESS_DB_PASSWORD:?error}
+      SPARKY_FITNESS_APP_DB_USER: ${SPARKY_FITNESS_APP_DB_USER:?error}
+      SPARKY_FITNESS_APP_DB_PASSWORD: ${SPARKY_FITNESS_APP_DB_PASSWORD:?error}
+      SPARKY_FITNESS_DB_PORT: 5432
+      SPARKY_FITNESS_API_ENCRYPTION_KEY: ${SPARKY_FITNESS_API_ENCRYPTION_KEY:?error}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?error}
+      SPARKY_FITNESS_FRONTEND_URL: ${SPARKY_FITNESS_FRONTEND_URL:?error}
+      SPARKY_FITNESS_DISABLE_SIGNUP: ${SPARKY_FITNESS_DISABLE_SIGNUP:-false}
+      SPARKY_FITNESS_FORCE_EMAIL_LOGIN: ${SPARKY_FITNESS_FORCE_EMAIL_LOGIN:-true}
+    restart: unless-stopped
+    depends_on:
+      sparkyfitness-db:
+        condition: service_healthy
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/backup:/app/SparkyFitnessServer/backup
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/uploads:/app/SparkyFitnessServer/uploads
+
+  sparkyfitness-frontend:
+    image: ghcr.io/codewithcj/sparkyfitness-frontend:v0.17.3
+    container_name: sparkyfitness-frontend
+    ports:
+      - "3004:80"
+    environment:
+      SPARKY_FITNESS_FRONTEND_URL: ${SPARKY_FITNESS_FRONTEND_URL:?error}
+    restart: unless-stopped
+    depends_on:
+      - sparkyfitness-server
