@@ -62,6 +62,17 @@
       "groupName": "beszel"
     },
     {
+      "description": "Group SparkyFitness updates together",
+      "matchPackageNames": [
+        "ghcr.io/codewithcj/sparkyfitness-server",
+        "ghcr.io/codewithcj/sparkyfitness-frontend"
+      ],
+      "matchFileNames": [
+        "docker/sparkyfitness/compose.yaml"
+      ],
+      "groupName": "sparkyfitness"
+    },
+    {
       "description": "Separate PRs per stack directory for Docker Compose updates",
       "matchManagers": [
         "docker-compose"
