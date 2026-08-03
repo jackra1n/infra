@@ -40,17 +40,16 @@ services:
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:2.3.1
     container_name: komodo-periphery
+    depends_on:
+      - core
     volumes:
-      ## Mount external docker socket
       - /var/run/docker.sock:/var/run/docker.sock
-      ## Allow Periphery to see processes outside of container
       - /proc:/proc
-      ## Specify the Periphery agent root directory - must be the same inside and outside the container.
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
-      ## Custom location for docker compose repo
       - ${PERIPHERY_ADDITIONAL_DIRECTORY}:${PERIPHERY_ADDITIONAL_DIRECTORY}
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/keys:/config/keys
     env_file: ./.env
+    ## network host is needed for proper host network stats
     network_mode: host
     restart: unless-stopped
     labels:
