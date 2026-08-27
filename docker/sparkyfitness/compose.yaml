@@ -19,7 +19,7 @@ services:
       retries: 5
 
   sparkyfitness-server:
-    image: ghcr.io/codewithcj/sparkyfitness-server:v1.6.3
+    image: ghcr.io/codewithcj/sparkyfitness-server:v1.6.4
     container_name: sparkyfitness-server
     environment:
       NODE_ENV: production
@@ -46,7 +46,7 @@ services:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/uploads:/app/SparkyFitnessServer/uploads
 
   sparkyfitness-frontend:
-    image: ghcr.io/codewithcj/sparkyfitness-frontend:v1.6.3
+    image: ghcr.io/codewithcj/sparkyfitness-frontend:v1.6.4
     container_name: sparkyfitness-frontend
     ports:
       - "3004:80"
