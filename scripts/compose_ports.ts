@@ -4,19 +4,23 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 
-const COMPOSE_FILENAMES = new Set([
-  "compose.yaml",
-  "compose.yml",
-  "docker-compose.yaml",
-  "docker-compose.yml",
-]);
-
-const RANGE_PATTERN = /^\d+-\d+$/;
+const COMPOSE_FILENAMES: Record<string, true> = {
+  "compose.yaml": true,
+  "compose.yml": true,
+  "docker-compose.yaml": true,
+  "docker-compose.yml": true,
+};
 
 type UsageEntry = {
   service: string;
   filePath: string;
   raw: string;
+};
+
+type Row = {
+  port: number;
+  protocol: string;
+  entries: UsageEntry[];
 };
 
 type CliArgs = {
@@ -25,9 +29,7 @@ type CliArgs = {
   noConflicts: boolean;
 };
 
-function toPosix(value: string): string {
-  return value.split(path.sep).join("/");
-}
+const toPosix = (value: string): string => value.split(path.sep).join("/");
 
 function usageAndExit(code: number): never {
   const stream = code === 0 ? process.stdout : process.stderr;
@@ -47,254 +49,161 @@ function usageAndExit(code: number): never {
 }
 
 function parseCli(argv: string[]): CliArgs {
-  let root = "docker";
-  let checkPorts: number[] | null = null;
-  let noConflicts = false;
+  const args: CliArgs = { root: "docker", checkPorts: null, noConflicts: false };
+  const fail = (message: string): never => {
+    console.error(`error: ${message}`);
+    usageAndExit(2);
+  };
 
   for (let i = 0; i < argv.length; i++) {
     const token = argv[i];
 
-    if (token === "-h" || token === "--help") {
-      usageAndExit(0);
+    if (token === "-h" || token === "--help") usageAndExit(0);
+
+    if (token === "--no-conflicts") {
+      args.noConflicts = true;
+      continue;
     }
 
     if (token === "--root") {
-      const next = argv[i + 1];
-      if (!next || next.startsWith("-")) {
-        console.error("error: --root requires a directory argument");
-        usageAndExit(2);
-      }
-      root = next;
-      i++;
+      const next = argv[++i];
+      if (!next || next.startsWith("-")) fail("--root requires a directory argument");
+      args.root = next;
       continue;
     }
 
     if (token === "--check") {
       const ports: number[] = [];
-      let j = i + 1;
-      while (j < argv.length && !argv[j].startsWith("-")) {
-        const parsed = Number.parseInt(argv[j], 10);
-        if (!Number.isInteger(parsed) || parsed <= 0 || parsed > 65535) {
-          console.error(`error: invalid port in --check: ${argv[j]}`);
-          usageAndExit(2);
+      while (i + 1 < argv.length && !argv[i + 1].startsWith("-")) {
+        const port = Number.parseInt(argv[++i], 10);
+        if (!Number.isInteger(port) || port <= 0 || port > 65535) {
+          fail(`invalid port in --check: ${argv[i]}`);
         }
-        ports.push(parsed);
-        j++;
+        ports.push(port);
       }
-
-      if (ports.length === 0) {
-        console.error("error: --check requires at least one port");
-        usageAndExit(2);
-      }
-
-      checkPorts = ports;
-      i = j - 1;
+      if (ports.length === 0) fail("--check requires at least one port");
+      args.checkPorts = ports;
       continue;
     }
 
-    if (token === "--no-conflicts") {
-      noConflicts = true;
-      continue;
-    }
-
-    console.error(`error: unknown argument: ${token}`);
-    usageAndExit(2);
+    fail(`unknown argument: ${token}`);
   }
 
-  return { root, checkPorts, noConflicts };
+  return args;
 }
 
 function findComposeFiles(root: string): string[] {
-  const files: string[] = [];
-
-  function walk(current: string): void {
-    const entries = readdirSync(current, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = path.join(current, entry.name);
-      if (entry.isDirectory()) {
-        walk(fullPath);
-        continue;
-      }
-
-      if (entry.isFile() && COMPOSE_FILENAMES.has(entry.name)) {
-        files.push(fullPath);
-      }
-    }
-  }
-
-  walk(root);
-  files.sort((a, b) => a.localeCompare(b));
-  return files;
+  return readdirSync(root, { recursive: true, encoding: "utf8" })
+    .filter((file) => path.basename(file) in COMPOSE_FILENAMES)
+    .map((file) => path.join(root, file))
+    .sort((a, b) => a.localeCompare(b));
 }
 
-function normalizeProtocol(raw: unknown): string {
-  const protocol = String(raw ?? "tcp").trim().toLowerCase();
-  return protocol || "tcp";
-}
+const normalizeProtocol = (value: unknown): string =>
+  String(value ?? "tcp").trim().toLowerCase() || "tcp";
 
 function parsePortToken(token: unknown): number[] {
   const text = String(token ?? "").trim();
-  if (!text) {
-    return [];
-  }
+  if (/^\d+$/.test(text)) return [Number(text)];
 
-  if (/^\d+$/.test(text)) {
-    return [Number.parseInt(text, 10)];
-  }
-
-  if (RANGE_PATTERN.test(text)) {
-    const [startText, endText] = text.split("-", 2);
-    const start = Number.parseInt(startText, 10);
-    const end = Number.parseInt(endText, 10);
-    if (end < start) {
-      return [];
-    }
-    return Array.from({ length: end - start + 1 }, (_, idx) => start + idx);
-  }
-
-  return [];
+  if (!/^\d+-\d+$/.test(text)) return [];
+  const [start, end] = text.split("-").map(Number);
+  return end < start ? [] : Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
-function extractPublishedFromShortPort(portSpec: string): { numbers: number[]; protocol: string } {
-  const raw = String(portSpec).trim();
-  if (!raw) {
-    return { numbers: [], protocol: "tcp" };
-  }
-
-  const slashIndex = raw.lastIndexOf("/");
-  const mapping = slashIndex === -1 ? raw : raw.slice(0, slashIndex);
-  const protocol = slashIndex === -1 ? "tcp" : raw.slice(slashIndex + 1);
-
-  if (!mapping.includes(":")) {
-    return { numbers: [], protocol: normalizeProtocol(protocol) };
-  }
-
-  const hostSide = mapping.slice(0, mapping.lastIndexOf(":"));
-  const published = hostSide.slice(hostSide.lastIndexOf(":") + 1).trim();
-  return {
-    numbers: parsePortToken(published),
-    protocol: normalizeProtocol(protocol),
-  };
-}
-
+// Published host ports from a short-syntax mapping like "127.0.0.1:8080:80/udp"
+// (host-ip:host-port:container-port). The published side is the middle segment.
 function iterServicePorts(ports: unknown): Array<{ numbers: number[]; protocol: string; raw: string }> {
-  if (!Array.isArray(ports)) {
-    return [];
-  }
+  if (!Array.isArray(ports)) return [];
 
-  const result: Array<{ numbers: number[]; protocol: string; raw: string }> = [];
-
-  for (const item of ports) {
+  return ports.flatMap((item) => {
     if (typeof item === "string") {
-      const parsed = extractPublishedFromShortPort(item);
-      if (parsed.numbers.length > 0) {
-        result.push({ ...parsed, raw: item });
-      }
-      continue;
+      const raw = item.trim();
+      const slash = raw.lastIndexOf("/");
+      const mapping = slash === -1 ? raw : raw.slice(0, slash);
+      const protocol = slash === -1 ? "tcp" : raw.slice(slash + 1);
+
+      if (!mapping.includes(":")) return [];
+      const hostSide = mapping.slice(0, mapping.lastIndexOf(":"));
+      const numbers = parsePortToken(hostSide.slice(hostSide.lastIndexOf(":") + 1));
+      return numbers.length ? [{ numbers, protocol: normalizeProtocol(protocol), raw: item }] : [];
     }
 
     if (item && typeof item === "object" && !Array.isArray(item)) {
-      const protocol = normalizeProtocol((item as Record<string, unknown>).protocol);
-      const numbers = parsePortToken((item as Record<string, unknown>).published);
-      if (numbers.length > 0) {
-        result.push({
-          numbers,
-          protocol,
-          raw: JSON.stringify(item),
-        });
-      }
+      const { published, protocol } = item as { published?: unknown; protocol?: unknown };
+      const numbers = parsePortToken(published);
+      return numbers.length
+        ? [{ numbers, protocol: normalizeProtocol(protocol), raw: JSON.stringify(item) }]
+        : [];
     }
-  }
 
-  return result;
+    return [];
+  });
 }
 
-function makeUsageKey(port: number, protocol: string): string {
-  return `${port}/${protocol}`;
-}
-
-function collectPortUsage(root: string): { usage: Map<string, UsageEntry[]>; warnings: string[] } {
-  const usage = new Map<string, UsageEntry[]>();
+function collectRows(root: string): { rows: Row[]; warnings: string[] } {
+  const byKey = new Map<string, Row>();
   const warnings: string[] = [];
 
-  for (const composeFile of findComposeFiles(root)) {
+  for (const file of findComposeFiles(root)) {
     let content: unknown;
     try {
-      content = YAML.parse(readFileSync(composeFile, "utf8"));
+      content = YAML.parse(readFileSync(file, "utf8"));
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      warnings.push(`${composeFile}: failed to parse YAML (${message})`);
+      warnings.push(`${file}: failed to parse YAML (${message})`);
       continue;
     }
 
-    if (!content || typeof content !== "object" || Array.isArray(content)) {
-      continue;
-    }
-
+    if (!content || typeof content !== "object" || Array.isArray(content)) continue;
     const services = (content as Record<string, unknown>).services;
-    if (!services || typeof services !== "object" || Array.isArray(services)) {
-      continue;
-    }
+    if (!services || typeof services !== "object" || Array.isArray(services)) continue;
 
-    for (const [serviceName, serviceDef] of Object.entries(services as Record<string, unknown>)) {
-      if (!serviceDef || typeof serviceDef !== "object" || Array.isArray(serviceDef)) {
-        continue;
-      }
+    for (const [service, serviceDef] of Object.entries(services as Record<string, unknown>)) {
+      if (!serviceDef || typeof serviceDef !== "object" || Array.isArray(serviceDef)) continue;
 
-      const ports = (serviceDef as Record<string, unknown>).ports;
-      for (const item of iterServicePorts(ports)) {
-        for (const port of item.numbers) {
-          const key = makeUsageKey(port, item.protocol);
-          const list = usage.get(key) ?? [];
-          const duplicate = list.some(
-            (entry) => entry.service === serviceName && entry.filePath === composeFile,
-          );
-          if (!duplicate) {
-            list.push({ service: serviceName, filePath: composeFile, raw: item.raw });
-            usage.set(key, list);
+      for (const { numbers, protocol, raw } of iterServicePorts((serviceDef as Record<string, unknown>).ports)) {
+        for (const port of numbers) {
+          const key = `${port}/${protocol}`;
+          const row = byKey.get(key) ?? { port, protocol, entries: [] };
+          if (!row.entries.some((entry) => entry.service === service && entry.filePath === file)) {
+            row.entries.push({ service, filePath: file, raw });
+            byKey.set(key, row);
           }
         }
       }
     }
   }
 
-  return { usage, warnings };
+  const rows = [...byKey.values()].sort((a, b) =>
+    a.port === b.port ? a.protocol.localeCompare(b.protocol) : a.port - b.port,
+  );
+  return { rows, warnings };
 }
 
-function splitUsageKey(key: string): { port: number; protocol: string } {
-  const slash = key.lastIndexOf("/");
-  return {
-    port: Number.parseInt(key.slice(0, slash), 10),
-    protocol: key.slice(slash + 1),
-  };
-}
+const formatEntries = (root: string, entries: UsageEntry[]): string =>
+  entries
+    .map((entry) => `${entry.service}@${toPosix(path.relative(root, entry.filePath))}`)
+    .sort()
+    .join(", ");
 
-function sortedUsageEntries(usage: Map<string, UsageEntry[]>): Array<{ port: number; protocol: string; entries: UsageEntry[] }> {
-  return [...usage.entries()]
-    .map(([key, entries]) => ({ ...splitUsageKey(key), entries }))
-    .sort((a, b) => (a.port === b.port ? a.protocol.localeCompare(b.protocol) : a.port - b.port));
-}
-
-function printUsageTable(usage: Map<string, UsageEntry[]>, root: string): void {
+function printUsageTable(rows: Row[], root: string): void {
   console.log("PORT  PROTO  SERVICES  DETAILS");
   console.log("----  -----  --------  -------");
 
-  for (const row of sortedUsageEntries(usage)) {
+  for (const row of rows) {
     const services = new Set(row.entries.map((entry) => entry.service));
-    const details = row.entries
-      .map((entry) => `${entry.service}@${toPosix(path.relative(root, entry.filePath))}`)
-      .sort()
-      .join(", ");
     console.log(
-      `${String(row.port).padEnd(4)}  ${row.protocol.padEnd(5)}  ${String(services.size).padEnd(8)}  ${details}`,
+      `${String(row.port).padEnd(4)}  ${row.protocol.padEnd(5)}  ${String(services.size).padEnd(8)}  ${formatEntries(root, row.entries)}`,
     );
   }
 }
 
-function printConflicts(usage: Map<string, UsageEntry[]>, root: string): void {
-  const conflicts = sortedUsageEntries(usage).filter((row) => {
-    const keys = new Set(row.entries.map((entry) => `${entry.service}|${entry.filePath}`));
-    return keys.size > 1;
+function printConflicts(rows: Row[], root: string): void {
+  // Conflict = same port/proto claimed by more than one service+file pair.
+  const conflicts = rows.filter((row) => {
+    const owners = new Set(row.entries.map((entry) => `${entry.service}|${entry.filePath}`));
+    return owners.size > 1;
   });
 
   if (conflicts.length === 0) {
@@ -304,34 +213,22 @@ function printConflicts(usage: Map<string, UsageEntry[]>, root: string): void {
 
   console.log("\nConflicts:");
   for (const row of conflicts) {
-    const details = row.entries
-      .map((entry) => `${entry.service}@${toPosix(path.relative(root, entry.filePath))}`)
-      .sort()
-      .join(", ");
-    console.log(`- ${row.port}/${row.protocol}: ${details}`);
+    console.log(`- ${row.port}/${row.protocol}: ${formatEntries(root, row.entries)}`);
   }
 }
 
-function printPortChecks(usage: Map<string, UsageEntry[]>, ports: number[], root: string): number {
+function printPortChecks(rows: Row[], ports: number[], root: string): number {
   let inUse = false;
 
   for (const port of ports) {
-    const matches = sortedUsageEntries(usage).filter((row) => row.port === port);
+    const matches = rows.filter((row) => row.port === port);
     if (matches.length === 0) {
       console.log(`${port}: free`);
       continue;
     }
 
     inUse = true;
-    const details = matches
-      .map((row) => {
-        const owners = row.entries
-          .map((entry) => `${entry.service}@${toPosix(path.relative(root, entry.filePath))}`)
-          .sort()
-          .join(", ");
-        return `${row.protocol} -> ${owners}`;
-      })
-      .join("; ");
+    const details = matches.map((row) => `${row.protocol} -> ${formatEntries(root, row.entries)}`).join("; ");
     console.log(`${port}: in use (${details})`);
   }
 
@@ -348,31 +245,22 @@ function main(): number {
   const root = path.resolve(args.root);
 
   try {
-    if (!statSync(root).isDirectory()) {
-      console.error(`error: root path does not exist or is not a directory: ${root}`);
-      return 2;
-    }
+    if (!statSync(root).isDirectory()) throw new Error("not a directory");
   } catch {
     console.error(`error: root path does not exist or is not a directory: ${root}`);
     return 2;
   }
 
-  const { usage, warnings } = collectPortUsage(root);
+  const { rows, warnings } = collectRows(root);
   if (warnings.length > 0) {
     console.error("Warnings:");
-    for (const warning of warnings) {
-      console.error(`- ${warning}`);
-    }
+    for (const warning of warnings) console.error(`- ${warning}`);
   }
 
-  if (args.checkPorts) {
-    return printPortChecks(usage, args.checkPorts, root);
-  }
+  if (args.checkPorts) return printPortChecks(rows, args.checkPorts, root);
 
-  printUsageTable(usage, root);
-  if (!args.noConflicts) {
-    printConflicts(usage, root);
-  }
+  printUsageTable(rows, root);
+  if (!args.noConflicts) printConflicts(rows, root);
 
   return 0;
 }
