@@ -2,7 +2,7 @@ name: sparkyfitness
 
 services:
   sparkyfitness-db:
-    image: postgres:18.4-alpine
+    image: postgres:18
     container_name: sparkyfitness-db
     restart: unless-stopped
     environment:
