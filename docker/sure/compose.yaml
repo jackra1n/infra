@@ -1,0 +1,70 @@
+name: sure
+
+services:
+  sure-web:
+    image: ghcr.io/we-promise/sure:0.7.4
+    container_name: sure-web
+    depends_on:
+      sure-db:
+        condition: service_healthy
+      sure-redis:
+        condition: service_healthy
+    volumes:
+      # Active Storage uploads (receipts, attachments, logos)
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/storage:/rails/storage
+    environment:
+      - TZ=Europe/Berlin
+      # Service names are internal to this stack, so they stay here rather than in .env
+      - DB_HOST=sure-db
+      - REDIS_URL=redis://sure-redis:6379/1
+    env_file: .env
+    ports:
+      - "3005:3000"
+    restart: unless-stopped
+
+  sure-worker:
+    image: ghcr.io/we-promise/sure:0.7.4
+    container_name: sure-worker
+    depends_on:
+      sure-db:
+        condition: service_healthy
+      sure-redis:
+        condition: service_healthy
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/storage:/rails/storage
+    environment:
+      - TZ=Europe/Berlin
+      - DB_HOST=sure-db
+      - REDIS_URL=redis://sure-redis:6379/1
+    env_file: .env
+    command: bundle exec sidekiq
+    restart: unless-stopped
+
+  sure-db:
+    image: postgres:18
+    container_name: sure-db
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql
+    environment:
+      - TZ=Europe/Berlin
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  sure-redis:
+    image: redis:8.10.1
+    container_name: sure-redis
+    volumes:
+      - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/redis:/data
+    environment:
+      - TZ=Europe/Berlin
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
