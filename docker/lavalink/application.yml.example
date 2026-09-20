@@ -42,10 +42,11 @@ plugins:
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
     oauth:
-      # Optional: use a separate account and keep refreshToken only in the deployed file.
-      enabled: false
-    # TV requires OAuth; add it only after configuring authentication.
+      # Use a separate account. Set refreshToken only in the deployed file;
+      # without one, the plugin starts the device authorization flow.
+      enabled: true
     clients:
+      - TV
       - TVHTML5_SIMPLY
       - WEB
       - WEBEMBEDDED
