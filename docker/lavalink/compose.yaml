@@ -11,11 +11,24 @@ services:
       - _JAVA_OPTIONS=-Xmx2G -XX:+UseZGC
       - SERVER_PORT=2333
       - LAVALINK_SERVER_PASSWORD=${LAVALINK_SERVER_PASSWORD}
+      - LAVALINK_SERVER_SOURCES_YOUTUBE=false
+      - PLUGINS_YOUTUBE_REMOTECIPHER_URL=http://yt-cipher:8001
+      - PLUGINS_YOUTUBE_REMOTECIPHER_PASSWORD=${YT_CIPHER_API_TOKEN:?Set YT_CIPHER_API_TOKEN}
+      - PLUGINS_YOUTUBE_REMOTECIPHER_USERAGENT=substiify
       - TZ=Europe/Berlin
     ports:
       - "2333:2333"
+    depends_on:
+      - yt-cipher
     restart: unless-stopped
     deploy:
       resources:
         limits:
           memory: 2.5G
+
+  yt-cipher:
+    image: ghcr.io/kikkia/yt-cipher:master
+    environment:
+      - API_TOKEN=${YT_CIPHER_API_TOKEN:?Set YT_CIPHER_API_TOKEN}
+      - OVERRIDE_PLAYER_VARIANT=IAS
+    restart: unless-stopped
