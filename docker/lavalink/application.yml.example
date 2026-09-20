@@ -1,0 +1,82 @@
+# Copy to ${DOCKER_DATA_DIR}/${COMPOSE_PROJECT_NAME}/application.yml.
+# compose.yaml supplies the server password and plugins.youtube.remoteCipher settings.
+
+server:
+  port: 2333
+  address: 0.0.0.0
+
+lavalink:
+  plugins:
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
+    # Snapshot revision used by the deployed YouTube plugin.
+    - dependency: "dev.lavalink.youtube:youtube-plugin:2be8e542d3f6f178e048dca565892684c2e40177"
+      snapshot: true
+    - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
+  pluginsDir: "./plugins"
+  server:
+    password: "${LAVALINK_SERVER_PASSWORD}"
+    sources:
+      youtube: false
+      bandcamp: true
+      soundcloud: true
+      twitch: true
+      vimeo: true
+      http: true
+      local: false
+    bufferDurationMs: 800
+    frameBufferDurationMs: 5000
+    opusEncodingQuality: 8
+    resamplingQuality: MEDIUM
+    trackStuckThresholdMs: 10000
+    useSeekGhosting: true
+    youtubePlaylistLoadLimit: 100
+    playerUpdateInterval: 5
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+    gc-warnings: true
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    oauth:
+      # Optional: use a separate account and keep refreshToken only in the deployed file.
+      enabled: false
+    # TV requires OAuth; add it only after configuring authentication.
+    clients:
+      - TVHTML5_SIMPLY
+      - WEB
+      - WEBEMBEDDED
+      - MUSIC
+      - ANDROID_MUSIC
+      - ANDROID_VR
+    # Per-client overrides belong under clientOptions.WEB, not directly under youtube.WEB.
+  lavasrc:
+    providers:
+      - 'ytsearch:"%ISRC%"'
+      - "ytsearch:%QUERY%"
+      - "ytmsearch:%QUERY%"
+      - "scsearch:%QUERY%"
+    sources:
+      youtube: false
+    youtube:
+      countryCode: "US"
+
+logging:
+  file:
+    path: ./logs/
+  level:
+    root: INFO
+    lavalink: INFO
+  logback:
+    rollingpolicy:
+      max-file-size: 1GB
+      max-history: 30
+  request:
+    enabled: true
+    includeClientInfo: true
+    includeHeaders: false
+    includeQueryString: false
+    includePayload: false
