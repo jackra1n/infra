@@ -58,7 +58,7 @@ services:
       retries: 5
 
   sure-redis:
-    image: redis:8.10.1
+    image: redis:8.10.2
     container_name: sure-redis
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/redis:/data
