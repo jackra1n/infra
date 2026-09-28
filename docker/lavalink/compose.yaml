@@ -34,3 +34,7 @@ services:
     image: ghcr.io/topi314/spotify-tokener:master
     init: true
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
