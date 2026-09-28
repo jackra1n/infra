@@ -1,5 +1,7 @@
 # Copy to ${DOCKER_DATA_DIR}/${COMPOSE_PROJECT_NAME}/application.yml.
-# compose.yaml supplies the server password and plugins.youtube.remoteCipher settings.
+# Lavalink/plugin behavior lives here; Compose owns containers and injects secrets.
+# Recreate Lavalink after updating this file and compose.yaml. The old host plugins/
+# directory is no longer mounted, so removed plugins (including SponsorBlock) stay removed.
 
 server:
   port: 2333
@@ -7,14 +9,12 @@ server:
 
 lavalink:
   plugins:
-    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
-    # Snapshot revision used by the deployed YouTube plugin.
-    - dependency: "dev.lavalink.youtube:youtube-plugin:2be8e542d3f6f178e048dca565892684c2e40177"
+    - dependency: com.github.topi314.lavasrc:lavasrc-plugin:4.8.3
+    - dependency: dev.lavalink.youtube:youtube-plugin:2be8e542d3f6f178e048dca565892684c2e40177
       snapshot: true
-    - dependency: "com.github.topi314.sponsorblock:sponsorblock-plugin:3.0.1"
-  pluginsDir: "./plugins"
+  pluginsDir: ./plugins
   server:
-    password: "${LAVALINK_SERVER_PASSWORD}"
+    password: ${LAVALINK_SERVER_PASSWORD}
     sources:
       youtube: false
       bandcamp: true
@@ -41,9 +41,12 @@ plugins:
     allowSearch: true
     allowDirectVideoIds: true
     allowDirectPlaylistIds: true
+    remoteCipher:
+      url: http://yt-cipher:8001
+      password: ${YT_CIPHER_API_TOKEN}
+      userAgent: substiify
     oauth:
-      # Use a separate account. Set refreshToken only in the deployed file;
-      # without one, the plugin starts the device authorization flow.
+      # Use a separate account; without a refreshToken, device authorization starts.
       enabled: true
     clients:
       - TV
@@ -53,17 +56,20 @@ plugins:
       - MUSIC
       - ANDROID_MUSIC
       - ANDROID_VR
-    # Per-client overrides belong under clientOptions.WEB, not directly under youtube.WEB.
   lavasrc:
     providers:
       - 'ytsearch:"%ISRC%"'
-      - "ytsearch:%QUERY%"
-      - "ytmsearch:%QUERY%"
-      - "scsearch:%QUERY%"
+      - 'ytmsearch:%QUERY%'
+      - 'ytsearch:%QUERY%'
+      - 'scsearch:%QUERY%'
     sources:
+      spotify: true
       youtube: false
-    youtube:
-      countryCode: "US"
+    spotify:
+      # Anonymous partner API metadata; providers above supply audio.
+      customTokenEndpoint: http://spotify-tokener:8080/api/token
+      preferPartnerApi: true
+      countryCode: US
 
 logging:
   file:
