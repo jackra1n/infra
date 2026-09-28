@@ -48,6 +48,7 @@ plugins:
     oauth:
       # Use a separate account; without a refreshToken, device authorization starts.
       enabled: true
+      refreshToken: ${YOUTUBE_REFRESH_TOKEN:}
     clients:
       - TV
       - TVHTML5_SIMPLY
