@@ -2,7 +2,7 @@ name: sure
 
 services:
   sure-web:
-    image: ghcr.io/we-promise/sure:0.7.4
+    image: ghcr.io/we-promise/sure:0.7.5
     container_name: sure-web
     depends_on:
       sure-db:
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
 
   sure-worker:
-    image: ghcr.io/we-promise/sure:0.7.4
+    image: ghcr.io/we-promise/sure:0.7.5
     container_name: sure-worker
     depends_on:
       sure-db:
