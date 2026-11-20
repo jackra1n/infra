@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
 
   db:
-    image: postgres:18
+    image: postgres:19
     container_name: paperless_postgres
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql
