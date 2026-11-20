@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   sure-db:
-    image: postgres:18
+    image: postgres:19
     container_name: sure-db
     volumes:
       - ${DOCKER_DATA_DIR:?error}/${COMPOSE_PROJECT_NAME:?error}/postgres:/var/lib/postgresql
